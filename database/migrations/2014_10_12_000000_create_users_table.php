@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('user_type')->nullable();
             $table->string('gender')->nullable();
             $table->string('image')->nullable();
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

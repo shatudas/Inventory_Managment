@@ -28,13 +28,13 @@
 
      <div class="card">
        <div class="card-header">
-        <h3> Add User
-         <a href="{{route('user.view')}}" class=" btn btn-success btn-sm float-right"> <i class="fa fa-list"></i> User List</a>
+        <h3> Edit User
+         <a href="{{route('user.view')}}" class=" btn btn-success btn-sm float-right"> <i class="fa fa-list"></i> Edit List</a>
         </h3>
        </div>
               
        <div class="card-body">
-        <form method="POST" action="{{route('user.store')}}" id="myForm">
+        <form method="POST" action="{{route('user.update',$editdata->id)}}" id="myForm">
          @csrf
          <div class="form-row">
 
@@ -42,37 +42,25 @@
            <label for="user_type">User Role</label>
            <select name="user_type" id="user_type" class="form-control">
             <option value="">Select Role</option>
-            <option value="Admin">Admin</option>
-            <option value="User">User</option>
+            <option value="Admin" {{ ($editdata->user_type=='Admin')?"selected":"" }}>Admin</option>
+            <option value="User" {{ ($editdata->user_type=='User')?"selected":"" }}>User</option>
            </select>
           </div>
 
           <div class="form-group col-md-4">
            <label for="name">Name</label>
-           <input type="text" name="name" class="form-control">
+           <input type="text" name="name" value="{{ $editdata->name }}" class="form-control">
            <font style="color:red">{{($errors->has('name'))?($errors->first('name')):'' }}</font>
           </div>
 
           <div class="form-group col-md-4">
            <label for="email">Email</label>
-           <input type="email" name="email" class="form-control">
+           <input type="email" name="email" value="{{ $editdata->email }}" class="form-control">
            <font style="color:red">{{($errors->has('email'))?($errors->first('email')):'' }}</font>
           </div>
 
-          <div class="form-group col-md-4">
-           <label for="password">Password</label>
-           <input type="password" name="password" id="password" class="form-control">
-           <font style="color:red">{{($errors->has('password'))?($errors->first('password')):'' }}</font>
-          </div>
-
-          <div class="form-group col-md-4">
-           <label for="comfirmpass">Comfrom Password</label>
-           <input type="password" name="comfirmpass" class="form-control">
-           <font style="color:red">{{($errors->has('comfirmpass'))?($errors->first('comfirmpass')):'' }}</font>
-          </div>
-
           <div class="form-group col-md-6">
-           <input type="submit" value="submit"  class="btn btn-primary">
+           <input type="submit" value="Update"  class="btn btn-primary">
           </div>
 
          </div>
@@ -103,14 +91,7 @@
      required: true,
      email: true,
     },
-     password: {
-     required: true,
-     minlength: 6
-    },
-     comfirmpass: {
-     required: true,
-     equalTo: '#password'
-    },
+    
 
     },
     messages: {
@@ -124,14 +105,7 @@
         required: "Please Enter a Email Address",
         email: "Please enter a <em>valid</em> email address",
       },
-       password: {
-        required: "Please Enter Password",
-        minlength: "Password Will Be Minimam Six Digit",
-      },
-       comfirmpass: {
-        required: "Please Enter Confirm Password",
-        equalTo: "Confirm password Dose Not Match",
-      },
+      
 
     },
     errorElement: 'span',

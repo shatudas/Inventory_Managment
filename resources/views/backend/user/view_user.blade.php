@@ -53,23 +53,18 @@
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
             <td align="center" >
-             @if($user->delete_able == true)
+             
              @if($user->status == '0')
-              <a href="{{ route('user.inacative',$user->id) }}" class="btn btn-primary btn-sm " > Publish </a >
+              <a href="{{ route('user.inactive',$user->id) }}" class="btn btn-primary btn-sm " > Publish </a >
              @else
               <a href="{{ route('user.active',$user->id) }}" class="btn btn-danger btn-sm"  > Draft </a>
              @endif 
-             @else
-              <small><a class="btn btn-success btn-sm p-0 m-0"> Publish </a></small>
-             @endif
+             
             </td>
             <td>
-             @if($user->delete_able == true)
+             
               <a title="Edit" href="{{ route('user.edit',$user->id) }}" class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></a>
               <a title="Delete" href="{{ route('user.delete',$user->id) }}" id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-             @else
-              <small><a class="btn btn-warning btn-sm p-0 m-0 text-white"> Super Admin </a></small>
-             @endif
             </td>
           </tr>
          @endforeach
