@@ -25,6 +25,9 @@
   <link rel="stylesheet" href="{{ asset('backend') }}/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('backend') }}/plugins/summernote/summernote-bs4.min.css">
+
+  <!-- jQuery -->
+  <script src="{{ asset('backend') }}/plugins/jquery/jquery.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -111,8 +114,7 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="{{ asset('backend') }}/plugins/jquery/jquery.min.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('backend') }}/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -145,5 +147,8 @@
 <script src="{{ asset('backend') }}/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('backend') }}/dist/js/pages/dashboard.js"></script>
+<!-- jquery-validation -->
+<script src="{{ asset('backend') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/jquery-validation/additional-methods.min.js"></script>
 </body>
 </html>
