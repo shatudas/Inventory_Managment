@@ -49,6 +49,32 @@ class ProfileController extends Controller
     return redirect()->route('profiles.view')->with('success','Profile Updated Successfully');
    }
 
+   public function passwordview(){
+    return view('backend.user.edit_password');
+   }
+
+
+   public function passwordupdate(Request $request){
+    if(Auth::attempt(['id'=>Auth::user()->id,'password'=>$request->current_password]))
+     {
+      $user=user::find(Auth::user()->id);
+      $user->password=bcrypt($request->new_password);
+      $user->save();
+      return redirect()->route('profiles.view')->with('success','password changed Successfully');
+     }
+     else
+     {
+      return redirect()->back()->with('error','Sorry! your current password dost not match');
+     }
+
+
+    }
+
+
+
+   
+
+
 
 
 

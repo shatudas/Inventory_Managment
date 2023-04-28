@@ -25,13 +25,18 @@ Route::prefix('user')->group(function()
 });
 
 
-
 //-------user---------//
 Route::prefix('profiles')->group(function()
 {
 	Route::get('/view','Backend\ProfileController@view')->name('profiles.view');
 	Route::get('/edit','Backend\ProfileController@edit')->name('profiles.edit');
 	Route::post('/update','Backend\ProfileController@update')->name('profiles.update');
+	Route::get('/password/view','Backend\ProfileController@passwordview')->name('profiles.password.view');
+	Route::post('/profiles/password/update','Backend\ProfileController@passwordupdate')->name('profiles.password.update');
+
+
+
+
 });
 
 

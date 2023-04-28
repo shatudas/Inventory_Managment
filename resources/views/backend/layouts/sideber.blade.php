@@ -39,12 +39,12 @@
        <p>Your Profile</p>
       </a>
      </li>
-     {{-- <li class="nav-item">
+     <li class="nav-item">
       <a href="{{route('profiles.password.view')}}" class="nav-link {{($route=='profiles.password.views')?'active':''}}">
        <i class="far fa-circle nav-icon"></i>
        <p>Change Password</p>
       </a>
-     </li> --}}
+     </li>
     </ul>
    </li>
 
