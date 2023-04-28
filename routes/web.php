@@ -24,3 +24,15 @@ Route::prefix('user')->group(function()
 	Route::get('/inactive/{id}','Backend\UserController@inactive')->name('user.inactive');
 });
 
+
+
+//-------user---------//
+Route::prefix('profiles')->group(function()
+{
+	Route::get('/view','Backend\ProfileController@view')->name('profiles.view');
+	Route::get('/edit','Backend\ProfileController@edit')->name('profiles.edit');
+	Route::post('/update','Backend\ProfileController@update')->name('profiles.update');
+});
+
+
+

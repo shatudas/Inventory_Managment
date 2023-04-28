@@ -145,8 +145,7 @@
 <!-- ./wrapper -->
 
 
-<script src="{{ asset('backend') }}/plugins/jquery/jquery.min.js"></script>
-
+{{-- <script src="{{ asset('backend') }}/plugins/jquery/jquery.min.js"></script> --}}
 
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('backend') }}/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -217,6 +216,18 @@
 </script>
 
 
+<!-----image show script------->
+<script type="text/javascript">
+  $(document).ready(function(){
+   $('#image').change(function(e){
+   var reader = new FileReader();
+   reader.onload=function(e){
+    $('#showImage').attr('src',e.target.result);
+   } 
+   reader.readAsDataURL(e.target.files['0']);
+   });
+  });
+</script>
 
 
 <!--------delete-------->
