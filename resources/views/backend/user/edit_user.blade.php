@@ -29,7 +29,7 @@
      <div class="card">
        <div class="card-header">
         <h3> Edit User
-         <a href="{{route('user.view')}}" class=" btn btn-success btn-sm float-right"> <i class="fa fa-list"></i> Edit List</a>
+         <a href="{{route('user.view')}}" class=" btn btn-success btn-sm float-right"> <i class="fa fa-list"></i> User List</a>
         </h3>
        </div>
               

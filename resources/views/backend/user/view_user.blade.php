@@ -35,7 +35,7 @@
       <div class="card-body">
        <table id="example1" class="table table-bordered table-striped">     
         <thead>
-         <tr align="center"> 
+         <tr > 
           <th>SL</th>
           <th>Role</th>
           <th>Name</th>
@@ -47,7 +47,7 @@
 
         <tbody>
          @foreach($alldata as $key => $user)
-          <tr align="center">  
+          <tr > 
             <td>{{ $key+1 }}</td>
             <td>{{ $user->user_type }}</td>
             <td>{{ $user->name }}</td>
@@ -63,8 +63,10 @@
             </td>
             <td>
              
-              <a title="Edit" href="{{ route('user.edit',$user->id) }}" class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></a>
-              <a title="Delete" href="{{ route('user.delete',$user->id) }}" id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+              <a href="{{ route('user.edit',$user->id) }}" title="Edit" class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></a>
+        
+     
+              <a href="{{ route('user.delete',$user->id) }}" title="Delete" id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
          @endforeach
@@ -81,4 +83,5 @@
   <!-- /.content-wrapper -->
 
 
-  @endsection
+
+@endsection

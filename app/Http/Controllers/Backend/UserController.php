@@ -34,7 +34,7 @@ class UserController extends Controller
   	$data->email = $request->email;
   	$data->password = bcrypt($request->password);
    $data->save();
-   return redirect()->route('user.view');
+   return redirect()->route('user.view')->with('success','Data Saved SuccessFully');
   }
 
 
@@ -49,7 +49,7 @@ class UserController extends Controller
   	$this->validate($request,[
 	  'user_type'  =>'required',
 	  'name'       =>'required',
-	  'email'      =>'required|unique:users,email'
+	  'email'      =>'required'
 	  ]);
 
 	  $data = User::find($id);
@@ -57,13 +57,34 @@ class UserController extends Controller
   	$data->name = $request->name;
   	$data->email = $request->email;
    $data->save();
-   return redirect()->route('user.view');
-
-
+   return redirect()->route('user.view')->with('success','Data Updated SuccessFully');
   }
 
 
+  public function delete ($id)
+   { 
+    $data = User::find($id);
+    if(file_exists('upload/user_images' .$data->image) AND !empty($data->image))
+     {
+      @unlink('upload/user_images' .$data->image);
+     }
+    $data->delete();
+    return redirect()->route('user.view')->with('error','Data Delete Successfully');
+   } 
 
+
+  public function inactive($id)
+   {
+    User::find($id)->where('id',$id)->update(['status'=>1]);
+    return redirect()->back();
+   }
+    
+ 
+  public function active($id)
+   {
+    User::find($id)->where('id',$id)->update(['status'=>0]);
+    return redirect()->back();
+   }
 
 
 
