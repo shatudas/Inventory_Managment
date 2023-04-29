@@ -37,6 +37,20 @@ Route::prefix('profiles')->group(function()
 });
 
 
+//-------supplier---------//
+Route::prefix('supplier')->group(function()
+{
+	Route::get('/view','Backend\SupplierController@view')->name('supplier.view');
+	Route::get('/add','Backend\SupplierController@add')->name('supplier.add');
+	Route::post('/store','Backend\SupplierController@store')->name('supplier.store');
+	Route::get('/edit/{id}','Backend\SupplierController@edit')->name('supplier.edit');
+	Route::post('/update/{id}','Backend\SupplierController@update')->name('supplier.update');
+	Route::get('/delete/{id}','Backend\SupplierController@delete')->name('supplier.delete');
+	Route::get('/active/{id}','Backend\SupplierController@active')->name('supplier.active');
+	Route::get('/inactive/{id}','Backend\SupplierController@inactive')->name('supplier.inactive');
+});
+
+
 
 });
 
