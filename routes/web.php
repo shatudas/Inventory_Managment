@@ -10,6 +10,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['middleware' => 'auth'],function(){
 
 //-------user---------//
 Route::prefix('user')->group(function()
@@ -33,11 +34,13 @@ Route::prefix('profiles')->group(function()
 	Route::post('/update','Backend\ProfileController@update')->name('profiles.update');
 	Route::get('/password/view','Backend\ProfileController@passwordview')->name('profiles.password.view');
 	Route::post('/profiles/password/update','Backend\ProfileController@passwordupdate')->name('profiles.password.update');
-
+});
 
 
 
 });
+
+
 
 
 
