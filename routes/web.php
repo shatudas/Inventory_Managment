@@ -80,6 +80,20 @@ Route::prefix('unit')->group(function()
 });
 
 
+//-------category---------//
+Route::prefix('category')->group(function()
+{
+	Route::get('/view','Backend\CategoryController@view')->name('category.view');
+	Route::get('/add','Backend\CategoryController@add')->name('category.add');
+	Route::post('/store','Backend\CategoryController@store')->name('category.store');
+	Route::get('/edit/{id}','Backend\CategoryController@edit')->name('category.edit');
+	Route::post('/update/{id}','Backend\CategoryController@update')->name('category.update');
+	Route::get('/delete/{id}','Backend\CategoryController@delete')->name('category.delete');
+	Route::get('/active/{id}','Backend\CategoryController@active')->name('category.active');
+	Route::get('/inactive/{id}','Backend\CategoryController@inactive')->name('category.inactive');
+});
+
+
 
 
 
