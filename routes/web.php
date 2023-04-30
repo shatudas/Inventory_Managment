@@ -94,6 +94,20 @@ Route::prefix('category')->group(function()
 });
 
 
+//-------category---------//
+Route::prefix('product')->group(function()
+{
+	Route::get('/view','Backend\ProductController@view')->name('product.view');
+	Route::get('/add','Backend\ProductController@add')->name('product.add');
+	Route::post('/store','Backend\ProductController@store')->name('product.store');
+	Route::get('/edit/{id}','Backend\ProductController@edit')->name('product.edit');
+	Route::post('/update/{id}','Backend\ProductController@update')->name('product.update');
+	Route::get('/delete/{id}','Backend\ProductController@delete')->name('product.delete');
+	Route::get('/active/{id}','Backend\ProductController@active')->name('product.active');
+	Route::get('/inactive/{id}','Backend\ProductController@inactive')->name('product.inactive');
+});
+
+
 
 
 
