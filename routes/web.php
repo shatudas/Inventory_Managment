@@ -52,7 +52,7 @@ Route::prefix('supplier')->group(function()
 
 
 
-//-------supplier---------//
+//-------customer---------//
 Route::prefix('customer')->group(function()
 {
 	Route::get('/view','Backend\CustomerController@view')->name('customer.view');
@@ -64,6 +64,23 @@ Route::prefix('customer')->group(function()
 	Route::get('/active/{id}','Backend\CustomerController@active')->name('customer.active');
 	Route::get('/inactive/{id}','Backend\CustomerController@inactive')->name('customer.inactive');
 });
+
+
+//-------unit---------//
+Route::prefix('unit')->group(function()
+{
+	Route::get('/view','Backend\UnitController@view')->name('unit.view');
+	Route::get('/add','Backend\UnitController@add')->name('unit.add');
+	Route::post('/store','Backend\UnitController@store')->name('unit.store');
+	Route::get('/edit/{id}','Backend\UnitController@edit')->name('unit.edit');
+	Route::post('/update/{id}','Backend\UnitController@update')->name('unit.update');
+	Route::get('/delete/{id}','Backend\UnitController@delete')->name('unit.delete');
+	Route::get('/active/{id}','Backend\UnitController@active')->name('unit.active');
+	Route::get('/inactive/{id}','Backend\UnitController@inactive')->name('unit.inactive');
+});
+
+
+
 
 
 
