@@ -52,6 +52,21 @@ Route::prefix('supplier')->group(function()
 
 
 
+//-------supplier---------//
+Route::prefix('customer')->group(function()
+{
+	Route::get('/view','Backend\CustomerController@view')->name('customer.view');
+	Route::get('/add','Backend\CustomerController@add')->name('customer.add');
+	Route::post('/store','Backend\CustomerController@store')->name('customer.store');
+	Route::get('/edit/{id}','Backend\CustomerController@edit')->name('customer.edit');
+	Route::post('/update/{id}','Backend\CustomerController@update')->name('customer.update');
+	Route::get('/delete/{id}','Backend\CustomerController@delete')->name('customer.delete');
+	Route::get('/active/{id}','Backend\CustomerController@active')->name('customer.active');
+	Route::get('/inactive/{id}','Backend\CustomerController@inactive')->name('customer.inactive');
+});
+
+
+
 });
 
 

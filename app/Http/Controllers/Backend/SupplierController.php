@@ -75,12 +75,13 @@ class SupplierController extends Controller
 	    return redirect()->route('supplier.view')->with('error','Data Delete Successfully');
 	   } 
 
-   public function inactive($id)
-   {
-    Supplier::find($id)->where('id',$id)->update(['status'=>1]);
-    return redirect()->back();
-   }
-    
+
+	  public function inactive($id)
+	   {
+	    Supplier::find($id)->where('id',$id)->update(['status'=>1]);
+	    return redirect()->back();
+	   }
+	    
 
 	  public function active($id)
 	   {

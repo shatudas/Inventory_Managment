@@ -8,12 +8,12 @@
    <div class="container-fluid">
     <div class="row mb-2">
      <div class="col-sm-6">
-     <h1 class="m-0">Manage Supplier</h1>
+     <h1 class="m-0">Manage Customer</h1>
      </div>
       <div class="col-sm-6">
        <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active">Supplier</li>
+        <li class="breadcrumb-item active">Customer</li>
        </ol>
       </div>
      </div>
@@ -29,37 +29,37 @@
      <div class="card">
 
        <div class="card-header">
-        <h3> Edit Supplier
-         <a href="{{route('supplier.view')}}" class=" btn btn-success btn-sm float-right"> <i class="fa fa-list"></i> Supplier List</a>
+        <h3> Add Customer
+         <a href="{{route('customer.view')}}" class=" btn btn-success btn-sm float-right"> <i class="fa fa-list"></i> Customer List</a>
         </h3>
        </div>
               
        <div class="card-body">
-        <form method="POST" action="{{route('supplier.update',$editdata->id)}}" id="myForm">
+        <form method="POST" action="{{route('customer.store')}}" id="myForm">
          @csrf
          <div class="form-row">
 
           <div class="form-group col-md-6">
            <label for="name">Name</label>
-           <input type="text" name="name" class="form-control" value="{{ $editdata->name }}">
+           <input type="text" name="name" class="form-control">
            <font style="color:red">{{($errors->has('name'))?($errors->first('name')):'' }}</font>
           </div>
 
           <div class="form-group col-md-6">
            <label for="mobile">Mobile</label>
-           <input type="mobile" name="mobile" class="form-control" value="{{ $editdata->mobile }}">
+           <input type="mobile" name="mobile" class="form-control">
            <font style="color:red">{{($errors->has('mobile'))?($errors->first('mobile')):'' }}</font>
           </div>
 
           <div class="form-group col-md-6">
            <label for="email">Email</label>
-           <input type="email" name="email" class="form-control" value="{{ $editdata->email }}">
+           <input type="email" name="email" class="form-control">
            <font style="color:red">{{($errors->has('email'))?($errors->first('email')):'' }}</font>
           </div>
 
           <div class="form-group col-md-6">
            <label for="address">Address</label>
-           <input type="address" name="address" class="form-control" value="{{ $editdata->address }}">
+           <input type="address" name="address" class="form-control">
            <font style="color:red">{{($errors->has('address'))?($errors->first('address')):'' }}</font>
           </div>
 
@@ -67,13 +67,13 @@
            <label for="status">Status</label>
            <select name="status" id="status" class="form-control">
             <option value="">Select Status</option>
-            <option value="0" {{ $editdata->status=="0"?"selected":"" }}>Active</option>
-            <option value="1" {{ $editdata->status=="1"?"selected":"" }}>Inactive</option>
+            <option value="0">Active</option>
+            <option value="1">Inactive</option>
            </select>
           </div>
 
           <div class="form-group col-md-6 " style="margin-top:30px;">
-           <input type="submit" value="Update"  class="btn btn-primary">
+           <input type="submit" value="submit"  class="btn btn-primary">
           </div>
 
          </div>
