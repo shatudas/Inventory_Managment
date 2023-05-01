@@ -20,4 +20,16 @@ class DefultController extends Controller
     	return response()->json($allCategory);
 
     }
+
+
+    public function getproduct(Request $request){
+
+    	$category_id =$request->category_id;
+    	$allproduct = Product::where('category_id',$category_id)->get();
+    	return response()->json($allproduct);
+
+    }
+
+
+    
 }

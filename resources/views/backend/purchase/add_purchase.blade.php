@@ -75,7 +75,7 @@
 
 
           <div class="form-group col-md-2 " style="margin-top:30px;">
-           <i class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Item</i>
+           <span class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Item</span>
           </div>
 
 
@@ -115,6 +115,32 @@
    });
  });
 </script>
+
+
+<script type="text/javascript">
+ $(function(){
+   $(document).on('change','#category_id',function(){
+    var category_id = $(this).val();
+    $.ajax({
+     url:"{{ route('get_product') }}",
+     type:"GET",
+     data:{category_id:category_id},
+     success:function(data){
+      var html = '<option value="">Select Product</option>';
+      $.each(data,function(key,v){
+      html +='<option value="'+v.id+'">'+v.name+'</option>';
+      });
+      $('#product_id').html(html);
+     }
+    });
+   });
+ });
+</script>
+
+
+
+
+
 
 
 <script>
