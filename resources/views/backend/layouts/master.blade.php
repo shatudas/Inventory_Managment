@@ -36,6 +36,16 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+
+   <script>
+   $( function() {
+     $( ".datepicker" ).datepicker();
+   } );
+  </script>
+
+
   <style type="text/css">
    .notify-corner
    {
