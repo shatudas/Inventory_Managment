@@ -20,7 +20,7 @@ class PurchaseController extends Controller
 
 
   public function add(){
-  	 $data['suppliers'] = Supplier::where('status','0')->get();
+    $data['suppliers'] = Supplier::where('status','0')->get();
    	$data['units']     = Unit::where('status','0')->get();
    	$data['categorys'] = Category::where('status','0')->get();
   	return view('backend.purchase.add_purchase',$data);

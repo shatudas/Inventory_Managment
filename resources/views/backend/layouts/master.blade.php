@@ -155,7 +155,7 @@
 <!-- ./wrapper -->
 
 
-{{-- <script src="{{ asset('backend') }}/plugins/jquery/jquery.min.js"></script> --}}
+<script src="{{ asset('backend') }}/plugins/jquery/jquery.min.js"></script>
 
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('backend') }}/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -206,6 +206,8 @@
 <script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-----handlebars---------->
+<script src="{{ asset('backend') }}/plugins/datatables-buttons/js/handlebars.js"></script>
 
 <script>
   $(function () {
@@ -266,6 +268,8 @@
   });
  });
 </script>
+
+
 
 
 
