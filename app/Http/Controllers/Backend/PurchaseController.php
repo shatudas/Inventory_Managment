@@ -10,6 +10,7 @@ use App\Model\Supplier;
 use App\Model\Category;
 use App\Model\Unit;
 use Auth;
+use DB;
 
 class PurchaseController extends Controller
 {
@@ -61,7 +62,24 @@ class PurchaseController extends Controller
     } 
 
 
+   public function purchaselist(){
+     $data['alldata'] = Purchase::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
+     return view('backend.purchase.view_paddinglist',$data);
+   }
 
+
+   public function aprove($id){
+
+    $purchase = Purchase::find($id);
+    $product = Product::where('id',$purchase->product_id)->first();
+    $purchase_qty =((float)($purchase->buying_qty))+((float)($product->quantity));
+    $product->quantity =$purchase_qty;
+    if($product->save()){
+     DB::table('purchases')->where('id',$id)->update(['status'=>1]);
+    }
+
+    return redirect()->route('purchase.padding.list')->with('success','Data Aproved SuccessFully');
+   }
 
 
 

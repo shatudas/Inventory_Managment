@@ -141,6 +141,12 @@
        <p>View Purchase </p>
       </a>
      </li>
+     <li class="nav-item">
+      <a href="{{route('purchase.padding.list')}}" class="nav-link  {{($route=='purchase.padding.list')?'active':''}}">
+       <i class="far fa-circle nav-icon"></i>
+       <p>Approval Purchase </p>
+      </a>
+     </li>
     </ul>
    </li>
 

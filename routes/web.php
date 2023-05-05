@@ -115,11 +115,9 @@ Route::prefix('purchase')->group(function()
 	Route::get('/view','Backend\PurchaseController@view')->name('purchase.view');
 	Route::get('/add','Backend\PurchaseController@add')->name('purchase.add');
 	Route::post('/store','Backend\PurchaseController@store')->name('purchase.store');
-	Route::get('/edit/{id}','Backend\PurchaseController@edit')->name('purchase.edit');
-	Route::post('/update/{id}','Backend\PurchaseController@update')->name('purchase.update');
 	Route::get('/delete/{id}','Backend\PurchaseController@delete')->name('purchase.delete');
-	Route::get('/active/{id}','Backend\PurchaseController@active')->name('purchase.active');
-	Route::get('/inactive/{id}','Backend\PurchaseController@inactive')->name('purchase.inactive');
+	Route::get('/purchase.padding/list','Backend\PurchaseController@purchaselist')->name('purchase.padding.list');
+	Route::get('/aprove/{id}','Backend\PurchaseController@aprove')->name('purchase.aprove');
 });
 
 
