@@ -44,8 +44,8 @@
           </div>
 
           <div class="form-group col-md-4">
-           <label for="purchase_no">Purchase No</label>
-           <input type="text" id="purchase_no" name="purchase_no" class="form-control"  >
+           <label for="purchase_id">Purchase No</label>
+           <input type="text" id="purchase_id" name="purchase_id" class="form-control"  >
           </div>
 
           <div class="form-group col-md-4">
@@ -175,7 +175,7 @@
 <script id="document-template" type="text/x-handlebars-template">
  <tr class="delete_add_more_item" id="delete_add_more_item">
   <input type="hidden" name="date[]" value="@{{date}}">
-  <input type="hidden" name="purchase_no[]" value="@{{purchase_no}}">
+  <input type="hidden" name="purchase_id[]" value="@{{purchase_id}}">
   <input type="hidden" name="supplier_id[]" value="@{{supplier_id}}">
   <td>
    <input type="hidden" name="category_id[]" value="@{{category_id}}"> 
@@ -216,7 +216,7 @@
  $(document).ready(function (){
   $(document).on("click",".addeventmore", function (){
    var date        = $('#date').val();
-   var purchase_no = $('#purchase_no').val();
+   var purchase_id = $('#purchase_id').val();
    var supplier_id = $('#supplier_id').val();
    var category_id = $('#category_id').val();
    var category_name = $('#category_id').find('option:selected').text();
@@ -227,8 +227,8 @@
     $.notify("date is required",{globalPosition:'top right',className:'error'});
     return false;
    }
-   if(purchase_no==''){
-    $.notify("purchase_no is required",{globalPosition:'top right',className:'error'});
+   if(purchase_id==''){
+    $.notify("purchase_id is required",{globalPosition:'top right',className:'error'});
     return false;
    }
    if(supplier_id==''){
@@ -248,7 +248,7 @@
    var template = Handlebars.compile(source);
    var data = {
     date:date,
-    purchase_no:purchase_no,
+    purchase_id:purchase_id,
     supplier_id:supplier_id,
     category_id:category_id,
     category_name:category_name,

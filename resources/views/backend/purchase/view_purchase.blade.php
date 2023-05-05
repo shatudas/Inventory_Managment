@@ -53,7 +53,7 @@
             <td>{{ $purchase->purchase_id }}</td>
             <td>{{ $purchase->date }}</td>
             <td>{{ $purchase['product']['name'] }}</td>
-            <td>{{ $purchase['unit']['name'] }}</td>
+            <td>{{-- {{ $purchase['unit']['name'] }} --}}</td>
             <td align="center">
              @if($purchase->status == '0')
               <a href="{{ route('purchase.inactive',$purchase->id) }}" class="btn btn-primary btn-sm " > Publish </a >

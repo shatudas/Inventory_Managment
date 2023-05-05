@@ -23,6 +23,7 @@ class CreatePurchasesTable extends Migration
             $table->double('buying_qty')->nullable();
             $table->double('unit_price')->nullable();
             $table->double('buying_price')->nullable();
+            $table->longText('description')->nullable();
             $table->tinyInteger('status')->default('0');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
