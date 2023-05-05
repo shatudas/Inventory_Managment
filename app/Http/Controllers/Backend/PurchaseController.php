@@ -47,10 +47,10 @@ class PurchaseController extends Controller
         $purchase->status       = '0';
         $purchase->created_by   = Auth::user()->id;
         $purchase->save();
-      }
-        return redirect()->route('purchase.view')->with('success','Data Saved SuccessFully');
+      }      
 
     }
+    return redirect()->route('purchase.view')->with('success','Data Saved SuccessFully');
   }
 
 }
