@@ -53,4 +53,21 @@ class PurchaseController extends Controller
     return redirect()->route('purchase.view')->with('success','Data Saved SuccessFully');
   }
 
+   public function delete ($id)
+    { 
+     $data = Purchase::find($id);
+     $data->delete();
+     return redirect()->route('purchase.view')->with('error','Data Delete Successfully');
+    } 
+
+
+
+
+
+
+
+
+
+
+
 }

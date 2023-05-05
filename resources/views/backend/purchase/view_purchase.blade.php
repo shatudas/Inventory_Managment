@@ -33,16 +33,21 @@
       </div>
       
       <div class="card-body">
-       <table id="example1" class="table table-bordered table-striped">     
+       <table id="example1" class="table table-bordered table-striped ">     
         <thead>
          <tr> 
           <th> SL </th>
-          <th> Purchase No </th>
+          <th> Purchase ID </th>
           <th> Date </th>
+          <th> Supulier </th>
+          <th> Category </th>
           <th> Product </th>
-          <th> Unit </th>
-          <th align="center"> Status </th>
-          <th> Action </th>
+          <th> Description </th>
+          <th> Qty </th>
+          <th> Unit Price </th>
+          <th> Buying Price </th>
+          <th> Status </th>
+          <th style="width:8%;"> Action </th>
          </tr>
         </thead>
 
@@ -51,19 +56,30 @@
           <tr > 
             <td>{{ $key+1 }}</td>
             <td>{{ $purchase->purchase_id }}</td>
-            <td>{{ $purchase->date }}</td>
+            <td>{{ date('d-m-Y',strtotime($purchase->date)) }}</td>
+            <td>{{ $purchase['supplier']['name'] }}</td>
+            <td>{{ $purchase['category']['name'] }}</td>
             <td>{{ $purchase['product']['name'] }}</td>
-            <td>{{-- {{ $purchase['unit']['name'] }} --}}</td>
-            <td align="center">
-             @if($purchase->status == '0')
-              <a href="{{ route('purchase.inactive',$purchase->id) }}" class="btn btn-primary btn-sm " > Publish </a >
+            <td>{{ $purchase->description }}</td>
+            <td> 
+             {{ $purchase->buying_qty }}
+             {{ $purchase['product']['unit']['name'] }}
+
+            </td>
+            <td>{{ $purchase->unit_price }}</td>
+            <td>
+              @if($purchase->status == '0')
+              <a href="" class="btn btn-primary btn-sm " > padding </a >
              @else
-              <a href="{{ route('purchase.active',$purchase->id) }}" class="btn btn-danger btn-sm"  > Draft </a>
+              <a href="" class="btn btn-danger btn-sm"  > Aprove </a>
              @endif 
             </td>
-            <td>
-              <a href="{{ route('purchase.edit',$purchase->id) }}" title="Edit" class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></a>
+            </td>
+            <td>{{ $purchase->buying_price }}</td>
+            <td align="center">
+             @if($purchase->status == '0')
               <a href="{{ route('purchase.delete',$purchase->id) }}" title="Delete" id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+              @endif 
             </td>
           </tr>
          @endforeach
