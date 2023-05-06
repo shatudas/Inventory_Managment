@@ -27,6 +27,9 @@
   <link rel="stylesheet" href="{{ asset('backend') }}/plugins/summernote/summernote-bs4.min.css">
   <!-------datatable-------->
   <link rel="stylesheet" href="{{ asset('backend') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('backend') }}/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="{{ asset('backend') }}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
   <!-- jQuery -->
   <script src="{{ asset('backend') }}/plugins/jquery/jquery.min.js"></script>
@@ -192,6 +195,8 @@
 <!-- jquery-validation -->
 <script src="{{ asset('backend') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="{{ asset('backend') }}/plugins/jquery-validation/additional-methods.min.js"></script>
+<!-- Select2 -->
+<script src="{{ asset('backend') }}/plugins/select2/js/select2.full.min.js"></script>
 
 
 <script src="{{ asset('backend') }}/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -208,6 +213,13 @@
 <script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-----handlebars---------->
 <script src="{{ asset('backend') }}/plugins/datatables-buttons/js/handlebars.js"></script>
+
+
+<script type="text/javascript">
+  $(function(){
+    $('.select2').select2()
+  });
+</script>
 
 <script>
   $(function () {

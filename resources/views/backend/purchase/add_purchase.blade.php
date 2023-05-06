@@ -40,17 +40,17 @@
 
           <div class="form-group col-md-4">
            <label for="suplier_id">Date</label>
-           <input type="text" name="date" id="date" class="form-control datepicker"  placeholder="YYYY-MM-DD" readonly>
+           <input type="text" name="date" id="date" class="form-control datepicker form-control-sm"  placeholder="YYYY-MM-DD" readonly>
           </div>
 
           <div class="form-group col-md-4">
            <label for="purchase_id">Purchase No</label>
-           <input type="text" id="purchase_id" name="purchase_id" class="form-control"  >
+           <input type="text" id="purchase_id" name="purchase_id" class="form-control form-control-sm"  >
           </div>
 
           <div class="form-group col-md-4">
            <label for="suplier_id">Supplier Name</label>
-           <select name="supplier_id" id="supplier_id" class="form-control">
+           <select name="supplier_id" id="supplier_id" class="form-control  select2">
             <option value="">Select Supplier</option>
             @foreach($suppliers as $supplier)
             <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
@@ -60,20 +60,20 @@
          
           <div class="form-group col-md-4">
            <label for="category_id">Category Name</label>
-           <select name="category_id" id="category_id" class="form-control">
+           <select name="category_id" id="category_id" class="form-control select2">
             <option value="">Select Category</option>
            </select>
           </div>
 
           <div class="form-group col-md-4">
            <label for="product_id">Product Name</label>
-           <select name="product_id" id="product_id" class="form-control">
+           <select name="product_id" id="product_id" class="form-control select2">
             <option value="">Select Product</option>
            </select>
           </div>
 
           <div class="form-group col-md-2 " style="margin-top:30px;">
-           <button class="btn btn-primary btn-sm addeventmore"><i class="fa fa-plus-circle"> Add Item</i>
+           <button class="btn btn-primary btn-sm addeventmore "><i class="fa fa-plus-circle"> Add Item</i>
            </button>
           </div>
 
