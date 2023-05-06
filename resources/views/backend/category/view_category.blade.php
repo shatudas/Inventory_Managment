@@ -55,9 +55,16 @@
               <a href="{{ route('category.active',$category->id) }}" class="btn btn-danger btn-sm"  > Draft </a>
              @endif 
             </td>
+
+            @php
+             $count_category = App\Model\Product::where('category_id',$category->id)->count();
+            @endphp
+
             <td>
               <a href="{{ route('category.edit',$category->id) }}" title="Edit" class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></a>
+             @if($count_category<1)
               <a href="{{ route('category.delete',$category->id) }}" title="Delete" id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+             @endif
             </td>
           </tr>
          @endforeach

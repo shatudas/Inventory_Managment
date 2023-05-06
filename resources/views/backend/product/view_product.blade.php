@@ -61,9 +61,14 @@
               <a href="{{ route('product.active',$product->id) }}" class="btn btn-danger btn-sm"  > Draft </a>
              @endif 
             </td>
+            @php
+             $count_product = App\Model\Purchase::where('product_id',$product->id)->count();
+            @endphp
             <td>
               <a href="{{ route('product.edit',$product->id) }}" title="Edit" class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></a>
+              @if($count_product<1)
               <a href="{{ route('product.delete',$product->id) }}" title="Delete" id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+              @endif
             </td>
           </tr>
          @endforeach

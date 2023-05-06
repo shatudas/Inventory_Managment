@@ -55,9 +55,16 @@
               <a href="{{ route('unit.active',$unit->id) }}" class="btn btn-danger btn-sm"  > Draft </a>
              @endif 
             </td>
+
+            @php
+             $count_unit = App\Model\Product::where('unit_id',$unit->id)->count();
+            @endphp
+
             <td>
               <a href="{{ route('unit.edit',$unit->id) }}" title="Edit" class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></a>
+              @if($count_unit<1)
               <a href="{{ route('unit.delete',$unit->id) }}" title="Delete" id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+              @endif
             </td>
           </tr>
          @endforeach

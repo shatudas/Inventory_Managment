@@ -61,9 +61,16 @@
               <a href="{{ route('supplier.active',$supplier->id) }}" class="btn btn-danger btn-sm"  > Draft </a>
              @endif 
             </td>
+
+            @php
+            $count_supplier = App\Model\Product::where('suplier_id',$supplier->id)->count();
+            @endphp
+
             <td>
               <a href="{{ route('supplier.edit',$supplier->id) }}" title="Edit" class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></a>
+              @if($count_supplier<1)
               <a href="{{ route('supplier.delete',$supplier->id) }}" title="Delete" id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+              @endif
             </td>
           </tr>
          @endforeach
