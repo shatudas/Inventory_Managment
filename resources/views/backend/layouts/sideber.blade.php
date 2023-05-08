@@ -129,7 +129,7 @@
    </li>
 
 
-   <li class="nav-item has-treeview {{($prefix=='/purchase')?'menu-open':''}}">
+   <li class="nav-item has-treeview {{($prefix=='/invoices')?'menu-open':''}}">
     <a href="#" class="nav-link">
      <i class="nav-icon fas fa-copy"></i>
      <p> Manage Purchase  <i class="fas fa-angle-left right"></i> <span class=""></span></p>
@@ -147,6 +147,30 @@
        <p>Approval Purchase </p>
       </a>
      </li>
+    </ul>
+   </li>
+
+
+   <li class="nav-item has-treeview {{($prefix=='/invoices')?'menu-open':''}}">
+    <a href="#" class="nav-link">
+     <i class="nav-icon fas fa-copy"></i>
+     <p> Manage Invoices  <i class="fas fa-angle-left right"></i> <span class=""></span></p>
+    </a>
+    <ul class="nav nav-treeview ">
+     <li class="nav-item">
+      <a href="{{route('invoices.view')}}" class="nav-link  {{($route=='invoices.view')?'active':''}}">
+       <i class="far fa-circle nav-icon"></i>
+       <p>View Invoices </p>
+      </a>
+     </li>
+     <li class="nav-item">
+      <a href="{{route('invoices.padding.list')}}" class="nav-link  {{($route=='invoices.padding.list')?'active':''}}">
+       <i class="far fa-circle nav-icon"></i>
+       <p>View Approval</p>
+      </a>
+     </li>
+
+     
     </ul>
    </li>
 

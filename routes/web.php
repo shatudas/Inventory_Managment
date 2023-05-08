@@ -109,7 +109,7 @@ Route::prefix('product')->group(function()
 
 
 
-//-------category---------//
+//-------purchase---------//
 Route::prefix('purchase')->group(function()
 {
 	Route::get('/view','Backend\PurchaseController@view')->name('purchase.view');
@@ -118,6 +118,27 @@ Route::prefix('purchase')->group(function()
 	Route::get('/delete/{id}','Backend\PurchaseController@delete')->name('purchase.delete');
 	Route::get('/purchase.padding/list','Backend\PurchaseController@purchaselist')->name('purchase.padding.list');
 	Route::get('/aprove/{id}','Backend\PurchaseController@aprove')->name('purchase.aprove');
+});
+
+
+//-------invoices---------//
+Route::prefix('invoices')->group(function()
+{
+	Route::get('/invoices','Backend\PurchaseController@invoiceview')->name('invoices.view');
+	Route::get('/approval','Backend\PurchaseController@approvalview')->name('approval.add');
+
+});
+
+
+//-------purchase---------//
+Route::prefix('invoices')->group(function()
+{
+	Route::get('/view','Backend\InvoicesController@view')->name('invoices.view');
+	Route::get('/add','Backend\InvoicesController@add')->name('invoices.add');
+	Route::post('/store','Backend\InvoicesController@store')->name('invoices.store');
+	Route::get('/delete/{id}','Backend\InvoicesController@delete')->name('invoices.delete');
+	Route::get('/purchase.padding/list','Backend\InvoicesController@purchaselist')->name('invoices.padding.list');
+	Route::get('/aprove/{id}','Backend\InvoicesController@aprove')->name('invoices.aprove');
 });
 
 
