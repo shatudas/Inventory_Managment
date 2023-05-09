@@ -19,9 +19,24 @@ use DB;
 class InvoicesController extends Controller
 {
 	
-   public function view(){
+  public function view(){
   	$data['alldata'] = Invoice::orderBy('date','desc')->orderBy('id','desc')->get();
    return view('backend.invoice.view_invoice',$data);
+  }
+
+
+  public function add(){
+    $data['categorys'] = Category::where('status','0')->get();
+   	$invoiceData = Invoice::orderBy('id','desc')->first();
+    if($invoiceData == null){
+     $firstReg = '0';
+     $data['invoiceNo'] = $firstReg + 1;
+
+    }else{
+    $invoiceData = Invoice::orderBy('id','desc')->first()->invoice_no;
+    $data['invoiceNo'] = $invoiceData + 1;
+    }
+  	return view('backend.invoice.add_invoice',$data);
   }
 
 

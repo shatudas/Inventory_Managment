@@ -144,11 +144,7 @@ Route::prefix('invoices')->group(function()
 
 Route::get('/get_category','Backend\DefultController@getcategory')->name('get_category');
 Route::get('/get_product','Backend\DefultController@getproduct')->name('get_product');
-
-
-
-
-
+Route::get('/chack-product-stock','Backend\DefultController@getstock')->name('chack-product-stock');
 
 
 
