@@ -13,6 +13,7 @@ use App\Model\Invoice;
 use App\Model\InvoiceDetali;
 use App\Model\payment;
 use App\Model\PaymentDetali;
+use App\Model\Customer;
 use Auth;
 use DB;
 
@@ -26,6 +27,7 @@ class InvoicesController extends Controller
 
 
   public function add(){
+    $data['customers'] = customer::all();
     $data['categorys'] = Category::where('status','0')->get();
    	$invoiceData = Invoice::orderBy('id','desc')->first();
     if($invoiceData == null){

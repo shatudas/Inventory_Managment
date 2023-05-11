@@ -45,7 +45,7 @@
           </div>
 
           <div class="form-group col-md-2">
-           <label for="suplier_id">Date</label>
+           <label for="date">Date</label>
            <input type="text" name="date" id="date" class="form-control datepicker form-control-sm"  placeholder="YYYY-MM-DD" readonly>
           </div>
 
@@ -67,7 +67,7 @@
           </div>
 
           <div class="form-group col-md-2">
-           <label for="product_id">Stock (PCS/KG)</label>
+           <label for="product_id">Stock</label>
            <input type="text" name="current_stock_qty" id="current_stock_qty" class="form-control form-control-sm pdemo" readonly style="background-color:#D8FDBA">
           </div>
 
@@ -90,8 +90,7 @@
             <th>Product Name</th>
             <th>Unit</th>
             <th>Unit Price</th>
-            <th>Discripson</th>
-            <th width="10%">Total Price</th>
+            <th>Total Price</th>
             <th>Action</th>
            </tr>
           </thead>
@@ -100,7 +99,13 @@
           </tbody>
           <tbody>
            <tr>
-            <td colspan="5"></td>
+            <td colspan="4">Discount</td>
+            <td>
+             <input type="text" name="discount_amount" id="discount_amount" class="form-control form-control-sm discount_amount" placeholder="Enter Discount Amount"  >
+            </td>
+           </tr>
+           <tr>
+            <td colspan="4"></td>
             <td>
              <input type="text" name="estimated_amount" value="0" id="estimated_amount" class="form-control form-control-sm text-right estimated_amount" readonly >
             </td>
@@ -109,8 +114,53 @@
           </tbody>
          </table>
          <br>
+
+         <div class="form-row">
+          <div class="form-group col-12">
+           <textarea class="form-control" id="description" name="description" placeholder="whire description here">
+           </textarea>
+          </div>
+         </div>
+
+
+         <div class="form-row">
+          <div class="form-group col-md-4">
+           <label>Paid Status</label>
+           <select name="paid_status" id="paid_status" class="form-control">
+            <option value="">Select Status</option>
+            <option value="full_paid">Full Paid</option>
+            <option value="full_due">Full Due</option>
+            <option value="partial_paid">Partial Paid</option>
+           </select><br>
+           <input type="text" name="paid_amount" class="form-control form-control-sm paid_amount" placeholder="Enter paid Amount" style="display:none;">
+          </div>
+
+          <div class="form-group col-md-8">
+           <label>Cuntomer Name</label>
+            <select name="customer_id" id="customer_id" class="form-control customer_id">
+             @foreach($customers as $customer)
+            <option value={{ $customer->id }}"">{{ $customer->name }} ({{ $customer->mobile }}, {{ $customer->address }})</option>
+            @endforeach
+            <option value="0">New Customer</option>
+           </select>
+          </div>
+
+         </div>
+
+          <div class="form-row new_cuntomer" style="display:none;">
+           <div class="form-group col-md-4">
+            <input type="text" name="name" id="name" class="form-control form-control-sm" placeholder="Write Customer Name">
+           </div>
+           <div class="form-group col-md-4">
+            <input type="text" name="mobile" id="mobile" class="form-control form-control-sm" placeholder="Write Customer mobile">
+           </div>
+           <div class="form-group col-md-4">
+            <input type="text" name="address" id="address" class="form-control form-control-sm" placeholder="Write Customer address">
+           </div>
+          </div>
+    
          <div class="form-group">
-          <button type="submit" class="btn btn-primary"  id="storeButton">Purchase Store</button>
+          <button type="submit" class="btn btn-primary"  id="storeButton">Invoice Store</button>
          </div>
          
         </form>
@@ -166,41 +216,34 @@
  </script>
 
 
-<script id="document-template" type="text/x-handlebars-template">
- <tr class="delete_add_more_item" id="delete_add_more_item">
-  <input type="hidden" name="date[]" value="@{{date}}">
-  <input type="hidden" name="purchase_id[]" value="@{{purchase_id}}">
-  <input type="hidden" name="supplier_id[]" value="@{{supplier_id}}">
-  <td>
-   <input type="hidden" name="category_id[]" value="@{{category_id}}"> 
-   @{{category_name}} 
+ <script id="document-template" type="text/x-handlebars-template">
+  <tr class="delete_add_more_item" id="delete_add_more_item">
+   <input type="hidden" name="date" value="@{{date}}">
+   <input type="hidden" name="invoice_no" value="@{{invoice_no}}">
+   <td>
+    <input type="hidden" name="category_id[]" value="@{{category_id}}"> 
+    @{{category_name}} 
+   </td>
+   <td>
+    <input type="hidden" name="product_id[]" value="@{{product_id}}"> 
+    @{{product_name}}
   </td>
   <td>
-   <input type="hidden" name="product_id[]" value="@{{product_id}}"> 
-   @{{product_name}}
- </td>
- <td>
-  <input type="number" name="buying_qty[]" class="form-control form-control-sm text-right buying_qty" min="1" value="1">
- </td>
- <td>
-  <input type="number" name="unit_price[]" class="form-control form-control-sm text-right unit_price" value="">
-  </td> 
-  <td>
-   <input type="text" name="description[]" class="form-control form-control-sm">
+   <input type="number" name="selling_qty[]" class="form-control form-control-sm text-right selling_qty" min="1" value="1">
   </td>
   <td>
-   <input name="buying_price[]" class="form-control form-control-sm text-right buying_price"  value="0" readonly>
-  </td>
-  <td>
-   <button class="btn btn-danger btn-sm removeeventmore">
-    <i class="fa fa-window-close"></i>
-   </button>
-  </td>
- </tr>
-
-</script>
-
-
+   <input type="number" name="unit_price[]" class="form-control form-control-sm text-right unit_price" value="">
+   </td> 
+   <td>
+    <input name="selling_price[]" class="form-control form-control-sm text-right selling_price"  value="0" readonly>
+   </td>
+   <td>
+    <button class="btn btn-danger btn-sm removeeventmore">
+     <i class="fa fa-window-close"></i>
+    </button>
+   </td>
+  </tr>
+ </script>
 
 
 <script type="text/javascript">
@@ -208,7 +251,7 @@
  $(document).ready(function (){
   $(document).on("click",".addeventmore", function (){
    var date        = $('#date').val();
-   var purchase_id = $('#purchase_id').val();
+   var invoice_no = $('#invoice_no').val();
    var supplier_id = $('#supplier_id').val();
    var category_id = $('#category_id').val();
    var category_name = $('#category_id').find('option:selected').text();
@@ -219,14 +262,7 @@
     $.notify("date is required",{globalPosition:'top right',className:'error'});
     return false;
    }
-   if(purchase_id==''){
-    $.notify("purchase_id is required",{globalPosition:'top right',className:'error'});
-    return false;
-   }
-   if(supplier_id==''){
-    $.notify("supplier_id is required",{globalPosition:'top right',className:'error'});
-    return false;
-   }
+  
    if(category_id==''){
     $.notify("category_id is required",{globalPosition:'top right',className:'error'});
     return false;
@@ -240,8 +276,7 @@
    var template = Handlebars.compile(source);
    var data = {
     date:date,
-    purchase_id:purchase_id,
-    supplier_id:supplier_id,
+    invoice_no:invoice_no,
     category_id:category_id,
     category_name:category_name,
     product_id:product_id,
@@ -257,27 +292,63 @@
    totalAmountPrice();
   });
 
-  $(document).on('keyup click','.unit_price,.buying_qty',function(){
+  $(document).on('keyup click','.unit_price,.selling_qty',function(){
    var unit_price =$(this).closest("tr").find("input.unit_price").val();
-   var qty =$(this).closest("tr").find('input.buying_qty').val();
+   var qty =$(this).closest("tr").find('input.selling_qty').val();
    var total = unit_price*qty;
-   $(this).closest("tr").find("input.buying_price").val(total);
+   $(this).closest("tr").find("input.selling_price").val(total);
+   $('#discount_amount').trigger('keyup');
+  });
+
+  $(document).on('keyup','#discount_amount',function(){
    totalAmountPrice();
   });
 
 
   function totalAmountPrice(){
    var sum = 0;
-   $(".buying_price").each(function(){
+   $(".selling_price").each(function(){
     var value =$(this).val();
     if(!isNaN(value) && value.length != 0){
      sum +=parseFloat(value);
     }
    });
+
+   var discount_amount = parseFloat($('#discount_amount').val());
+   if(!isNaN(discount_amount) && discount_amount.length != 0){
+    sum -= parseFloat(discount_amount);
+   }
    $('#estimated_amount').val(sum);
   }
  });
 </script>
+
+
+  <script type="text/javascript">
+   $(document).on('change','#paid_status', function(){
+    var paid_status = $(this).val();
+    if(paid_status == 'partial_paid'){
+      $('.paid_amount').show();
+    }else{
+      $('.paid_amount').hide();
+    }
+   });
+
+   $(document).on('change','.customer_id',function(){
+    var customer_id = $(this).val();
+    if(customer_id == '0'){
+      $('.new_cuntomer').show();
+    }else{
+      $('.new_cuntomer').hide();
+    }
+   });
+
+  </script>
+
+
+ 
+   
+
 
 
 
