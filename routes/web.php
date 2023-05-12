@@ -122,7 +122,7 @@ Route::prefix('purchase')->group(function()
 
 
 //-------invoices---------//
-Route::prefix('invoices')->group(function()
+Route::prefix('purchase')->group(function()
 {
 	Route::get('/invoices','Backend\PurchaseController@invoiceview')->name('invoices.view');
 	Route::get('/approval','Backend\PurchaseController@approvalview')->name('approval.add');

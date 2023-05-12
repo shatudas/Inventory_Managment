@@ -46,7 +46,7 @@
         </thead>
 
         <tbody>
-         @foreach($alldata as $key => $invoice)
+         {{-- @foreach($alldata as $key => $invoice)
           <tr > 
             <td>{{ $key+1 }}</td>
             <td>AAA</td>
@@ -57,7 +57,7 @@
               <a href="{{ route('invoice.delete',$invoice->id) }}" title="Delete" id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
-         @endforeach
+         @endforeach --}}
         </tbody>
 
        </table>

@@ -46,7 +46,7 @@
 
           <div class="form-group col-md-2">
            <label for="date">Date</label>
-           <input type="text" name="date" id="date" class="form-control datepicker form-control-sm"  placeholder="YYYY-MM-DD" readonly>
+           <input type="text" name="date" value="{{ $date }}" id="date" class="form-control datepicker form-control-sm"  placeholder="YYYY-MM-DD" readonly>
           </div>
 
           <div class="form-group col-md-3">
@@ -81,7 +81,7 @@
 
 
        <div class="card-body">
-        <form method="post" action="{{ route('purchase.store') }}" id="myForm">
+        <form method="post" action="{{ route('invoices.store') }}" id="myForm">
          @csrf
          <table class="table-sm table-bordered" width="100%">
           <thead>
@@ -101,7 +101,7 @@
            <tr>
             <td colspan="4">Discount</td>
             <td>
-             <input type="text" name="discount_amount" id="discount_amount" class="form-control form-control-sm discount_amount" placeholder="Enter Discount Amount"  >
+             <input type="text" name="discount_amount" id="discount_amount" class="form-control form-control-sm discount_amount text-right" placeholder="Enter Discount Amount"  >
             </td>
            </tr>
            <tr>
