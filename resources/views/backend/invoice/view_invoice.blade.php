@@ -41,23 +41,25 @@
           <th> Invoices No </th>
           <th> Date </th>
           <th> Description </th>
-          <th style="width:8%;"> Action </th>
+          <th> Amount </th>
          </tr>
         </thead>
 
         <tbody>
-         {{-- @foreach($alldata as $key => $invoice)
+         @foreach($alldata as $key => $invoice)
           <tr > 
             <td>{{ $key+1 }}</td>
-            <td>AAA</td>
-            <td>{{ $invoice->invoice_no }}</td>
+            <td>
+            {{ $invoice['payment']['customer']['name'] }}
+            ({{ $invoice['payment']['customer']['mobile'] }},
+            {{ $invoice['payment']['customer']['addres'] }}
+          </td>
+            <td>Invoice No #{{ $invoice->invoice_no }}</td>
             <td>{{ date('d-m-Y',strtotime($invoice->date)) }}</td>
             <td>{{ $invoice->description }}</td>
-            <td align="center">
-              <a href="{{ route('invoice.delete',$invoice->id) }}" title="Delete" id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-            </td>
+            <td>{{ $invoice['payment']['total_amount'] }}</td>
           </tr>
-         @endforeach --}}
+         @endforeach
         </tbody>
 
        </table>

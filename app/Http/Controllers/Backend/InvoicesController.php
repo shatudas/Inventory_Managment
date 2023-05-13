@@ -21,7 +21,7 @@ class InvoicesController extends Controller
 {
 	
   public function view(){
-  	$data['alldata'] = Invoice::orderBy('date','desc')->orderBy('id','desc')->get();
+  	$data['alldata'] = Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','1')->get();
    return view('backend.invoice.view_invoice',$data);
   }
 
@@ -69,6 +69,7 @@ class InvoicesController extends Controller
         $invoice_detalis->unit_price = $request->unit_price[$i];
         $invoice_detalis->selling_price = $request->selling_price[$i];
         $invoice_detalis->status = '1';
+        $invoice_detalis->created_by =Auth::user()->id;
         $invoice_detalis->save();
        }
 
@@ -77,8 +78,10 @@ class InvoicesController extends Controller
         $customer->name =$request->name;
         $customer->mobile = $request->mobile;
         $customer->address = $request->address;
+        $customer->created_by =Auth::user()->id;
         $customer->save();
         $customer_id = $customer->id;
+
        }else{
         $customer_id =$request->customer_id;
        }
@@ -90,6 +93,7 @@ class InvoicesController extends Controller
        $payment->paid_status = $request->paid_status;
        $payment->discount_amount =$request->discount_amount;
        $payment->total_amount =$request->estimated_amount;
+       $payment->created_by =Auth::user()->id;
        
        if($payment->paid_status == 'full_paid'){
          $payment->paid_amount =$request->estimated_amount;
@@ -97,8 +101,8 @@ class InvoicesController extends Controller
          $payment_detalis->current_paid_amount = $request->estimated_amount;
 
        }elseif($payment->paid_status == 'full_due'){
-        $Payment->paid_amount = '0';
-        $Payment->due_amount =$request->estimated_amount;
+        $payment->paid_amount = '0';
+        $payment->due_amount =$request->estimated_amount;
         $payment_detalis->current_paid_amount = '0';
 
        }elseif($payment->paid_status == 'partial_paid'){
