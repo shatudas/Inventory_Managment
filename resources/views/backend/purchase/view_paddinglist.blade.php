@@ -80,6 +80,7 @@
               <a href="{{ route('purchase.aprove',$purchase->id) }}" title="aproveBtn" id="aproveBtn"  class="btn btn-sm btn-success"><i class="fa fa-check-circle"></i></a>
               @endif 
             </td>
+            
           </tr>
          @endforeach
         </tbody>

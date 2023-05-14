@@ -121,9 +121,26 @@ class InvoicesController extends Controller
     }
    }
 
-   return redirect()->route('invoices.view')->with('error','Sorry Do Not Select Any Product');
+   return redirect()->route('invoices.padding.list')->with('error','Sorry Do Not Select Any Product');
 
 
+  }
+
+
+  public function invoicelist(){
+   $data['alldata'] = Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
+   return view('backend.invoice.padding_invoice',$data);
+  }
+
+
+  public function delete($id){
+   $invoice = Invoice::find($id);
+   $invoice->delete();
+   InvoiceDetali::where('invoice_id',$invoice->id)->delete();
+   payment::where('invoice_id',$invoice->id)->delete();
+   PaymentDetali::where('invoice_id',$invoice->id)->delete();
+
+   return redirect()->route('invoices.padding.list')->with('success','Data Delete SuccessFully');
   }
 
  }
