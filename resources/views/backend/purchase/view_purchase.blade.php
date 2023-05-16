@@ -67,6 +67,7 @@
 
             </td>
             <td>{{ $purchase->unit_price }}</td>
+            <td>{{ $purchase->buying_price }}</td>
             <td>
               @if($purchase->status == '0')
               <a href="" class="btn btn-primary btn-sm " > padding </a >
@@ -75,7 +76,7 @@
              @endif 
             </td>
             </td>
-            <td>{{ $purchase->buying_price }}</td>
+            
             <td align="center">
              @if($purchase->status == '0')
               <a href="{{ route('purchase.delete',$purchase->id) }}" title="Delete" id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>

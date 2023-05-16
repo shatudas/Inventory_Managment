@@ -85,6 +85,7 @@
         <form method="post" action="{{ route('purchase.store') }}" id="myForm">
          @csrf
          <table class="table-sm table-bordered" width="100%">
+          
           <thead>
            <tr>
             <th>Category</th>
@@ -96,9 +97,10 @@
             <th>Action</th>
            </tr>
           </thead>
+
           <tbody id="addRow" class="addRow">
-           
           </tbody>
+
           <tbody>
            <tr>
             <td colspan="5"></td>
@@ -108,8 +110,10 @@
             <td></td>
            </tr>
           </tbody>
+
          </table>
          <br>
+         
          <div class="form-group">
           <button type="submit" class="btn btn-primary"  id="storeButton">Purchase Store</button>
          </div>

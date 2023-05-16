@@ -47,7 +47,7 @@ class InvoicesController extends Controller
    return redirect()->back()->with('error','Sorry Do Not Select Any Product');
    }else{
     if($request->paid_amount>$request->estimated_amount){
-    return redirect()->back()->with('error','Sorry  paid amount is maximun then total amount');
+    return redirect()->back()->with('error','Sorry paid amount is maximun then total amount');
    }else{
      
      $invoice = new Invoice;
@@ -143,4 +143,40 @@ class InvoicesController extends Controller
    return redirect()->route('invoices.padding.list')->with('success','Data Delete SuccessFully');
   }
 
+
+  public function aprove($id){
+   $invoice = Invoice::with(['invoice_detalis'])->find($id);
+   return view ('backend.invoice.invoice_aprove',compact('invoice'));
+
+  }
+
+
+  public function aprovalstore(Request $request, $id){
+   
+   foreach ($request->selling_qty as $key => $val) {
+    $invoice_detalis = InvoiceDetali::where('id',$key)->first();
+    $product = Product::where('id',$invoice_detalis->product_id)->first();
+    if($product->quantity < $request->selling_qty[$key]){
+    return redirect()->back()->with('error','Sorry ! You approve maxium value');
+    }
+   }
+
+   $invoice =Invoice::find($id);
+   $invoice->approved_by = Auth::user()->id;
+   $invoice->status = '1';
+   DB::transaction(function() use($request, $invoice, $id){
+    foreach ($request->selling_qty as $key => $val) {
+    $invoice_detalis = InvoiceDetali::where('id',$key)->first();
+    $product = Product::where('id',$invoice_detalis->product_id)->first();
+    $product->quantity = ((float)$product->quantity)-((float)$request->selling_qty[$key]);
+    $product->save();
+  }
+  $invoice->save();
+   });
+    
+  return redirect()->route('invoices.view')->with('success','Invoice SuccessFully');
  }
+
+
+
+}

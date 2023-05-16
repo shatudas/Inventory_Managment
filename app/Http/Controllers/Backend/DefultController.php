@@ -14,28 +14,22 @@ use Auth;
 class DefultController extends Controller
 {
     
-    public function getcategory(Request $request){
-    	$supplier_id =$request->supplier_id;
-    	$allCategory = Product::with(['category'])->select('category_id')->where('suplier_id',$supplier_id)->groupBy('category_id')->get();
-    	return response()->json($allCategory);
+  public function getcategory(Request $request){
+   $supplier_id =$request->supplier_id;
+   $allCategory = Product::with(['category'])->select('category_id')->where('suplier_id',$supplier_id)->groupBy('category_id')->get();
+   return response()->json($allCategory);
+   }
 
-    }
+  public function getproduct(Request $request){
+   $category_id =$request->category_id;
+   $allproduct = Product::where('category_id',$category_id)->get();
+   return response()->json($allproduct);
+  }
 
-
-    public function getproduct(Request $request){
-
-    	$category_id =$request->category_id;
-    	$allproduct = Product::where('category_id',$category_id)->get();
-    	return response()->json($allproduct);
-
-    }
-
-    public function getstock(Request $request){
-        $product_id = $request->product_id;
-        $stock = Product::where('id',$product_id)->first()->quantity;
-        return response()->json($stock);
-    }
-
-
-    
+  public function getstock(Request $request){
+   $product_id = $request->product_id;
+   $stock = Product::where('id',$product_id)->first()->quantity;
+   return response()->json($stock);
+  }
+   
 }

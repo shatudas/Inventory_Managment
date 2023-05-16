@@ -67,7 +67,7 @@
           </div>
 
           <div class="form-group col-md-2">
-           <label for="product_id">Stock</label>
+           <label for="current_stock_qty">Stock</label>
            <input type="text" name="current_stock_qty" id="current_stock_qty" class="form-control form-control-sm pdemo" readonly style="background-color:#D8FDBA">
           </div>
 
@@ -139,7 +139,7 @@
            <label>Cuntomer Name</label>
             <select name="customer_id" id="customer_id" class="form-control customer_id">
              @foreach($customers as $customer)
-            <option value={{ $customer->id }}"">{{ $customer->name }} ({{ $customer->mobile }}, {{ $customer->address }})</option>
+            <option value="{{ $customer->id }}">{{ $customer->name }} ({{ $customer->mobile }}, {{ $customer->address }})</option>
             @endforeach
             <option value="0">New Customer</option>
            </select>

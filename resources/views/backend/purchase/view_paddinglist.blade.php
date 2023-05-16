@@ -66,6 +66,7 @@
 
             </td>
             <td>{{ $purchase->unit_price }}</td>
+            <td>{{ $purchase->buying_price }}</td>
             <td>
               @if($purchase->status == '0')
               <span class="btn btn-primary btn-sm " > padding </span >
@@ -74,7 +75,7 @@
              @endif 
             </td>
             </td>
-            <td>{{ $purchase->buying_price }}</td>
+            
             <td align="center">
              @if($purchase->status == '0')
               <a href="{{ route('purchase.aprove',$purchase->id) }}" title="aproveBtn" id="aproveBtn"  class="btn btn-sm btn-success"><i class="fa fa-check-circle"></i></a>

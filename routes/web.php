@@ -139,6 +139,9 @@ Route::prefix('invoices')->group(function()
 	Route::get('/delete/{id}','Backend\InvoicesController@delete')->name('invoices.delete');
 	Route::get('/purchase/padding/list','Backend\InvoicesController@invoicelist')->name('invoices.padding.list');
 	Route::get('/aprove/{id}','Backend\InvoicesController@aprove')->name('invoices.aprove');
+	Route::post('/aproval/store/{id}','Backend\InvoicesController@aprovalstore')->name('aproval.store');
+
+	
 });
 
 
