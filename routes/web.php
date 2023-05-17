@@ -140,8 +140,9 @@ Route::prefix('invoices')->group(function()
 	Route::get('/purchase/padding/list','Backend\InvoicesController@invoicelist')->name('invoices.padding.list');
 	Route::get('/aprove/{id}','Backend\InvoicesController@aprove')->name('invoices.aprove');
 	Route::post('/aproval/store/{id}','Backend\InvoicesController@aprovalstore')->name('aproval.store');
+	Route::get('/print/list','Backend\InvoicesController@invoicePrintlist')->name('invoices.print.list');
+	Route::get('/print/{id}','Backend\InvoicesController@invoicePrint')->name('invoices.print');
 
-	
 });
 
 

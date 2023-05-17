@@ -16,6 +16,7 @@ use App\Model\PaymentDetali;
 use App\Model\Customer;
 use Auth;
 use DB;
+use PDF;
 
 class InvoicesController extends Controller
 {
@@ -177,6 +178,20 @@ class InvoicesController extends Controller
   return redirect()->route('invoices.view')->with('success','Invoice SuccessFully');
  }
 
+
+
+ public function invoicePrintlist(){
+  $data['alldata'] = Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','1')->get();
+  return view('backend.invoice.poss_invoice_list',$data);
+ }
+
+
+  function invoicePrint($id) {
+   $data = Invoice::with(['invoice_detalis'])->find($id);
+   $pdf = PDF::loadView('backend.PDF.invoice_pdf', $data);
+   $pdf->SetProtection(['copy', 'print'], '', 'pass');
+   return $pdf->stream('document.pdf');
+  }
 
 
 }

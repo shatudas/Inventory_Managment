@@ -169,6 +169,12 @@
        <p>View Approval</p>
       </a>
      </li>
+     <li class="nav-item">
+      <a href="{{route('invoices.print.list')}}" class="nav-link  {{($route=='invoices.print.list')?'active':''}}">
+       <i class="far fa-circle nav-icon"></i>
+       <p>Print Invoices</p>
+      </a>
+     </li>
 
      
     </ul>
