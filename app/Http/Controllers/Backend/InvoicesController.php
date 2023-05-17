@@ -187,10 +187,16 @@ class InvoicesController extends Controller
 
 
   function invoicePrint($id) {
-   $data = Invoice::with(['invoice_detalis'])->find($id);
-   $pdf = PDF::loadView('backend.PDF.invoice_pdf', $data);
-   $pdf->SetProtection(['copy', 'print'], '', 'pass');
-   return $pdf->stream('document.pdf');
+   // $data['invoice']  = Invoice::with(['invoice_detalis'])->find($id);
+   // $pdf = PDF::loadView('backend.PDF.invoice_pdf', $data);
+   // $pdf->SetProtection(['copy', 'print'], '', 'pass');
+   // return $pdf->stream('document.pdf');
+   // return view('backend.PDF.invoice_pdf', $data);
+
+    $data['invoice']  = Invoice::with(['invoice_detalis'])->find($id);
+    $pdf = PDF::loadView('backend.PDF.invoice_pdf', $data);
+    return $pdf->download('File.pdf');
+
   }
 
 

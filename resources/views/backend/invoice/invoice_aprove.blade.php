@@ -97,7 +97,6 @@
 
             @endforeach
 
-
             <tr>
              <td colspan="6" class="text-right">Sub Total</td>
              <td class="text-right">{{ $totalSum }}</td>

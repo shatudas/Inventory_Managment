@@ -59,7 +59,7 @@
             <td>{{ date('d-m-Y',strtotime($invoice->date)) }}</td>
             <td>{{ $invoice->description }}</td>
             <td>{{ $invoice['payment']['total_amount'] }}</td>
-            <td align="center"> <a href="{{ route('invoices.print',$invoice->id) }}" title="Print"  class="btn btn-sm btn-info"><i class="fa fa-print"></i></a></td>
+            <td align="center"> <a href="{{ route('invoices.print',$invoice->id) }}" target="_blank" title="Print"  class="btn btn-sm btn-info"><i class="fa fa-print"></i></a></td>
           </tr>
          @endforeach
         </tbody>
