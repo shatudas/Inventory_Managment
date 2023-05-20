@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Daily Invoice Repost</title>
+  <title>Stock Report</title>
    <!-------datatable-------->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -31,81 +31,63 @@
 </head>
 <body>
 
+
  <!-- Main content -->
  <section class="content mt-5">
   <div class="container">
+
    <div class="row">
     <div class="col-12">
 
      <div class="card">
+
+       <h1 class="m-0">Manage Product</h1>
+ 
       <div class="card-header">
-       <h3>Daily Invoice Report 
-        <small>
-        ({{date('d-m-y',strtotime($start_date ))}} - {{ date('d-m-y',strtotime($end_date)) }})
-       </small>
-      </h3>
+       <h3 align="center">Stock Report</h3>
       </div>
       
       <div class="card-body">
-
-
-       <table class="table table-bordered table-striped" style="border:0px;"  width="100%">     
+       
+       <table id="example1" class="table table-bordered table-striped">     
         <thead>
-         <tr> 
+         <tr > 
           <th> SL </th>
-          <th> Customer Name</th>
-          <th> Invoices No </th>
-          <th> Date </th>
-          <th> Description </th>
-          <th> Amount </th>
+          <th> Supplier </th>
+          <th> Category </th>
+          <th> Product Name </th>
+          <th> Unit </th>
+          <th> Stock </th>
+          <th> Status </th>
          </tr>
         </thead>
 
         <tbody>
-
-          @php
-           $total_sum = '0';
-          @endphp
-
-         @foreach($alldata as $key => $invoice)
+         @foreach($alldata as $key => $product)
           <tr > 
             <td>{{ $key+1 }}</td>
+            <td>{{ $product['supplier']['name'] }}</td>
+            <td>{{ $product['category']['name'] }}</td>
+            <td>{{ $product->name }}</td>
+            <td>{{ $product['unit']['name'] }}</td>
             <td>
-            {{ $invoice['payment']['customer']['name'] }}
-            ({{ $invoice['payment']['customer']['mobile'] }},
-            {{ $invoice['payment']['customer']['addres'] }}
-          </td>
-            <td>Invoice No #{{ $invoice->invoice_no }}</td>
-            <td>{{ date('d-m-Y',strtotime($invoice->date)) }}</td>
-            <td>{{ $invoice->description }}</td>
-            <td class="text-right">{{ $invoice['payment']['total_amount'] }}</td>
-
-            @php
-             $total_sum += $invoice['payment']['total_amount'];
-            @endphp
-
-
+              {{ $product->quantity }}
+            </td>
+            <td align="center">
+             @if($product->status == '0')
+              <a class="btn btn-primary btn-sm"> Publish </a >
+             @else
+              <a class="btn btn-danger btn-sm"> Draft </a>
+             @endif 
+            </td>
           </tr>
          @endforeach
-
-         <tr>
-          <td colspan="5" style="text-align: right;">Grend Total</td>
-          <td class="text-right">{{ $total_sum }}</td>
-         </tr>
         </tbody>
 
        </table>
 
 
-          @php
-           $date = new DateTime('now', new DateTimezone('Asia/Dhaka'));
-           @endphp
-
-           <i>Prining Time : {{ $date->format('F j ,Y, g:i a') }}</i>
-
-
-
-        <table width="100%" class="mt-5">
+       <table width="100%" class="mt-5">
          <tbody>
           <tr>
            <td width="50%" align="center" style="float:right;">
@@ -116,17 +98,14 @@
          </tbody>
        </table>
 
+
       </div>
-     </div> 
-
-
-
-
-
+     </div>  
     </div>
    </div>
   </div>
  </section>
+
 
 
 

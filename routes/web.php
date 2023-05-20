@@ -149,6 +149,14 @@ Route::prefix('invoices')->group(function()
 });
 
 
+//-------Stock---------//
+Route::prefix('stock')->group(function()
+{
+		Route::get('/report','Backend\StockController@stockReport')->name('stock.report');
+		Route::get('/report/PDF','Backend\StockController@stockReportPDF')->name('stock.report.pdf');
+
+
+});
 
 
 Route::get('/get_category','Backend\DefultController@getcategory')->name('get_category');
