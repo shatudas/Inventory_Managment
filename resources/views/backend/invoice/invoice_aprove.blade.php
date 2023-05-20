@@ -58,44 +58,44 @@
           <form method="POST" action="{{ Route('aproval.store',$invoice->id) }}">
            @csrf
            <table border="1" width="100%" style="margin-bottom: 10px;">
-           <thead>
-            <tr align="center">
-             <th>SL</th>
-             <th>Category</th>
-             <th>Product</th>
-             <th>Current Stock</th>
-             <th>Qty</th>
-             <th>Unit Price</th>
-             <th>Total Price</th>
-            </tr>
-           </thead>
-           <tbody>
+            <thead>
+             <tr align="center">
+              <th>SL</th>
+              <th>Category</th>
+              <th>Product</th>
+              <th>Current Stock</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
+              <th>Total Price</th>
+             </tr>
+            </thead>
+            <tbody>
 
 
-            @php
-            $totalSum = '0';
-            @endphp
+             @php
+             $totalSum = '0';
+             @endphp
 
-            @foreach($invoice['invoice_detalis'] as $key => $detalis)
+             @foreach($invoice['invoice_detalis'] as $key => $detalis)
 
-            <input type="hidden" name="category_id[]" value="{{ $detalis->category_id }}">
-            <input type="hidden" name="product_id[]" value="{{ $detalis->product_id }}">
-            <input type="hidden" name="selling_qty[{{ $detalis->id }}]" value="{{ $detalis->selling_qty }}">
+             <input type="hidden" name="category_id[]" value="{{ $detalis->category_id }}">
+             <input type="hidden" name="product_id[]" value="{{ $detalis->product_id }}">
+             <input type="hidden" name="selling_qty[{{ $detalis->id }}]" value="{{ $detalis->selling_qty }}">
 
-            <tr align="center">
-             <td>{{ $key+1 }}</td>
-             <td>{{ $detalis['category']['name'] }}</td>
-             <td>{{ $detalis['product']['name'] }}</td>
-             <td>{{ $detalis['product']['quantity'] }}</td>
-             <td>{{ $detalis->selling_qty }}</td>
-             <td>{{ $detalis->unit_price }}</td>
-             <td class="text-right">{{ $detalis->selling_price }}</td>
-            </tr>
-            @php
-             $totalSum +=  $detalis->selling_price;
-            @endphp
+             <tr align="center">
+              <td>{{ $key+1 }}</td>
+              <td>{{ $detalis['category']['name'] }}</td>
+              <td>{{ $detalis['product']['name'] }}</td>
+              <td>{{ $detalis['product']['quantity'] }}</td>
+              <td>{{ $detalis->selling_qty }}</td>
+              <td>{{ $detalis->unit_price }}</td>
+              <td class="text-right">{{ $detalis->selling_price }}</td>
+             </tr>
+             @php
+              $totalSum +=  $detalis->selling_price;
+             @endphp
 
-            @endforeach
+             @endforeach
 
             <tr>
              <td colspan="6" class="text-right">Sub Total</td>
@@ -123,9 +123,9 @@
             </tr>
 
 
-           </tbody>
+             </tbody>
            
-          </table>
+           </table>
 
 
           <button type="submit" class="btn btn-success">Invoice Aprova</button>

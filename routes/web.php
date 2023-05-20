@@ -37,6 +37,7 @@ Route::prefix('profiles')->group(function()
 });
 
 
+
 //-------supplier---------//
 Route::prefix('supplier')->group(function()
 {
@@ -142,8 +143,12 @@ Route::prefix('invoices')->group(function()
 	Route::post('/aproval/store/{id}','Backend\InvoicesController@aprovalstore')->name('aproval.store');
 	Route::get('/print/list','Backend\InvoicesController@invoicePrintlist')->name('invoices.print.list');
 	Route::get('/print/{id}','Backend\InvoicesController@invoicePrint')->name('invoices.print');
+	Route::get('/daily/report','Backend\InvoicesController@dailyReport')->name('daily.report');
+	Route::get('daily/report/pdf','Backend\InvoicesController@DailyPeportPDF')->name('daily.report.pdf');
 
 });
+
+
 
 
 Route::get('/get_category','Backend\DefultController@getcategory')->name('get_category');

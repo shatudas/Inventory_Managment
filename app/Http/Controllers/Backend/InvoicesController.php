@@ -187,17 +187,37 @@ class InvoicesController extends Controller
 
 
   function invoicePrint($id) {
-   // $data['invoice']  = Invoice::with(['invoice_detalis'])->find($id);
-   // $pdf = PDF::loadView('backend.PDF.invoice_pdf', $data);
-   // $pdf->SetProtection(['copy', 'print'], '', 'pass');
-   // return $pdf->stream('document.pdf');
-   // return view('backend.PDF.invoice_pdf', $data);
-
     $data['invoice']  = Invoice::with(['invoice_detalis'])->find($id);
-    $pdf = PDF::loadView('backend.PDF.invoice_pdf', $data);
-    return $pdf->download('File.pdf');
+    // $pdf = PDF::loadView('backend.PDF.invoice_pdf', $data);
+    // return $pdf->download('File.pdf');
+    return view('backend.PDF.invoice_pdf',$data);
 
   }
+
+
+  public function dailyReport(){
+   return view('backend.invoice.daily_invoice_report');
+  }
+
+
+  public function DailyPeportPDF(Request $request){
+
+   $startdate = date('Y-m-d',strtotime($request->start_date));
+   $endtdate = date('Y-m-d',strtotime($request->end_date)); 
+   $data['alldata'] = Invoice::whereBetween('date',[$startdate,$endtdate])->where('status','1')->get();
+   
+   $data['start_date'] =  date('Y-m-d',strtotime('$request->start_date'));
+   $data['end_date'] =  date('Y-m-d',strtotime('$request->end_date'));
+
+   // $pdf = PDF::loadView('backend.PDF.Daily_invoice_report_PDF', $data);
+   // return $pdf->download('File.pdf');
+
+   return view('backend.PDF.Daily_invoice_report_PDF',$data);
+
+  }
+
+
+  
 
 
 }

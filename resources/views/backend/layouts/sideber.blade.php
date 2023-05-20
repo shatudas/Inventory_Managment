@@ -175,10 +175,20 @@
        <p>Print Invoices</p>
       </a>
      </li>
+     <li class="nav-item">
+      <a href="{{route('daily.report')}}" class="nav-link  {{($route=='daily.report')?'active':''}}">
+       <i class="far fa-circle nav-icon"></i>
+       <p>Daily Invoice Report </p>
+      </a>
+     </li>
 
      
     </ul>
    </li>
+
+
+
+
 
 
 

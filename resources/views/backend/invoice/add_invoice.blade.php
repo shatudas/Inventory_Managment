@@ -8,12 +8,12 @@
    <div class="container-fluid">
     <div class="row mb-2">
      <div class="col-sm-6">
-     <h1 class="m-0">Manage Purchase</h1>
+     <h1 class="m-0">Manage Invoices</h1>
      </div>
       <div class="col-sm-6">
        <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active">Purchase</li>
+        <li class="breadcrumb-item active">Invoices</li>
        </ol>
       </div>
      </div>
@@ -29,8 +29,8 @@
      <div class="card">
 
        <div class="card-header">
-        <h3> Add Purchase
-         <a href="{{route('invoices.add')}}" class=" btn btn-success btn-sm float-right"> <i class="fa fa-list"></i> Purchase List</a>
+        <h3> Add Invoices
+         <a href="{{route('invoices.add')}}" class=" btn btn-success btn-sm float-right"> <i class="fa fa-list"></i> Invoices List</a>
         </h3>
        </div>
               

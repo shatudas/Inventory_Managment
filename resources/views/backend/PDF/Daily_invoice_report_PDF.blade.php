@@ -1,10 +1,7 @@
-{{-- @extends('backend.layouts.master')
-@section('content')
- --}}
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Daily Invoice Repost</title>
    <!-------datatable-------->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -34,7 +31,6 @@
 </head>
 <body>
 
-
  <!-- Main content -->
  <section class="content mt-5">
   <div class="container">
@@ -43,129 +39,83 @@
 
      <div class="card">
       <div class="card-header">
-       <h3>Invoice No # {{$invoice->invoice_no}} <small>{{date('d-m-Y',strtotime($invoice->date))}}</small>
-       </h3>
+       <h3>Daily Invoice Report 
+        <small>
+        ({{date('d-m-y',strtotime($start_date ))}} - {{ date('d-m-y',strtotime($end_date)) }})
+       </small>
+      </h3>
       </div>
       
       <div class="card-body">
 
-       @php
-        $payment = App\Model\payment::where('invoice_id',$invoice->id)->first();
-       @endphp
 
-          <table width="100%">
-            <tbody>
-              <tr>
-                <td width="15%"><p>Costomer Info:</p></td>
-                <td width="25%"><p><strong>Name:</strong> {{ $payment['customer']['name'] }}</p></td>
-                <td width="25%"><p><strong>Mobile:</strong> {{ $payment['customer']['mobile'] }}</p></td>
-                <td width="35%"><p><strong>Address:</strong> {{ $payment['customer']['address'] }}</p></td>
-              </tr>
-              <tr>
-               <td width="15%"></td>
-               <td width="85%" colspan="3"><strong>Discripshon:</strong>{{ $invoice->description  }}</td>
-              </tr>
-            </tbody>
-          </table>
+       <table class="table table-bordered table-striped" style="border:0px;"  width="100%">     
+        <thead>
+         <tr> 
+          <th> SL </th>
+          <th> Customer Name</th>
+          <th> Invoices No </th>
+          <th> Date </th>
+          <th> Description </th>
+          <th> Amount </th>
+         </tr>
+        </thead>
 
+        <tbody>
 
-          <form method="POST" action="{{ Route('aproval.store',$invoice->id) }}">
-           @csrf
-           <table border="1" width="100%" style="margin-bottom: 10px;">
-            <thead>
-             <tr align="center">
-              <th>SL</th>
-              <th>Category</th>
-              <th>Product</th>
-              <th>Current Stock</th>
-              <th>Qty</th>
-              <th>Unit Price</th>
-              <th>Total Price</th>
-             </tr>
-            </thead>
-            <tbody>
+          @php
+           $total_sum = '0';
+          @endphp
 
+         @foreach($alldata as $key => $invoice)
+          <tr > 
+            <td>{{ $key+1 }}</td>
+            <td>
+            {{ $invoice['payment']['customer']['name'] }}
+            ({{ $invoice['payment']['customer']['mobile'] }},
+            {{ $invoice['payment']['customer']['addres'] }}
+          </td>
+            <td>Invoice No #{{ $invoice->invoice_no }}</td>
+            <td>{{ date('d-m-Y',strtotime($invoice->date)) }}</td>
+            <td>{{ $invoice->description }}</td>
+            <td class="text-right">{{ $invoice['payment']['total_amount'] }}</td>
 
-             @php
-             $totalSum = '0';
-             @endphp
-
-             @foreach($invoice['invoice_detalis'] as $key => $detalis)
-
-             <input type="hidden" name="category_id[]" value="{{ $detalis->category_id }}">
-             <input type="hidden" name="product_id[]" value="{{ $detalis->product_id }}">
-             <input type="hidden" name="selling_qty[{{ $detalis->id }}]" value="{{ $detalis->selling_qty }}">
-
-             <tr align="center">
-              <td>{{ $key+1 }}</td>
-              <td>{{ $detalis['category']['name'] }}</td>
-              <td>{{ $detalis['product']['name'] }}</td>
-              <td>{{ $detalis['product']['quantity'] }}</td>
-              <td>{{ $detalis->selling_qty }}</td>
-              <td>{{ $detalis->unit_price }}</td>
-              <td class="text-right">{{ $detalis->selling_price }}</td>
-             </tr>
-             @php
-              $totalSum +=  $detalis->selling_price;
-             @endphp
-
-             @endforeach
-
-            <tr>
-             <td colspan="6" class="text-right">Sub Total</td>
-             <td class="text-right">{{ $totalSum }}</td>
-            </tr>
-
-            <tr>
-             <td colspan="6" class="text-right">Discount</td>
-             <td class="text-right">{{ $payment->discount_amount }}</td>
-            </tr>
-
-            <tr>
-             <td colspan="6" class="text-right">Paid Amount</td>
-             <td class="text-right">{{ $payment->paid_amount }}</td>
-            </tr>
-
-            <tr>
-             <td colspan="6" class="text-right">Due Amount</td>
-             <td class="text-right">{{ $payment->due_amount }}</td>
-            </tr>
-
-            <tr>
-             <td colspan="6" class="text-right">Grand Total</td>
-             <td class="text-right">{{ $payment->total_amount }}</td>
-            </tr>
-
-           </tbody>
-           
-           </table>
+            @php
+             $total_sum += $invoice['payment']['total_amount'];
+            @endphp
 
 
-           @php
-            $date = new DateTime('now', new DateTimezone('Asia/Dhaka'));
-           @endphp
+          </tr>
+         @endforeach
 
-           <i>Prining Time : {{ $date->format('F j ,Y, g:i a') }}</i>
+         <tr>
+          <td colspan="5" style="text-align: right;">Grend Total</td>
+          <td class="text-right">{{ $total_sum }}</td>
+         </tr>
+        </tbody>
+
+       </table>
 
 
-           <table width="100%" class="mt-5">
-             <tbody>
-               <tr>
-                 <td width="50%" align="center">
-                  <hr width="40%" align="center">
-                   Seller Signature
-                 </td>
-                 <td width="50%" align="center">
-                  <hr width="40%" align="center">
-                   Customer Name 
-                 </td>
-               </tr>
-             </tbody>
-           </table>
- 
+
+        <table width="100%" class="mt-5">
+         <tbody>
+          <tr>
+           <td width="50%" align="center" style="float:right;">
+            <hr width="40%" align="center">
+             Owner Signature
+           </td>
+          </tr>
+         </tbody>
+       </table>
 
       </div>
-     </div>  
+     </div> 
+
+
+
+
+
     </div>
    </div>
   </div>
@@ -231,7 +181,3 @@
 
 </body>
 </html>
-
-
-
-{{-- @endsection --}}
