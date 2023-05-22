@@ -190,8 +190,12 @@ class InvoicesController extends Controller
     $data['invoice']  = Invoice::with(['invoice_detalis'])->find($id);
     // $pdf = PDF::loadView('backend.PDF.invoice_pdf', $data);
     // return $pdf->download('File.pdf');
+    // $pdf->SetProtection(['copy','print'],'','pass');
+    // return $pdf->stream('invoice.pdf');
     return view('backend.PDF.invoice_pdf',$data);
 
+    // $pdf = PDF::loadView('backend.PDF.invoice_pdf', $data, [], ['format' => 'A4-L']);
+    // return $pdf->stream('invoice.pdf');
   }
 
 

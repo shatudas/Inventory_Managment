@@ -200,6 +200,12 @@
        <p>Stock Report </p>
       </a>
      </li>
+     <li class="nav-item">
+      <a href="{{route('stock.report.supplier.product')}}" class="nav-link  {{($route=='stock.report.supplier.product')?'active':''}}">
+       <i class="far fa-circle nav-icon"></i>
+       <p>Supplier/Product </p>
+      </a>
+     </li>
      
     </ul>
    </li>

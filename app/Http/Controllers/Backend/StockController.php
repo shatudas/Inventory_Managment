@@ -24,6 +24,18 @@ class StockController extends Controller
    return view('backend.PDF.stock_report_PDF',$data);
   }
 
+  public function SupplierProduct(){
+  	$data['supplier'] = Supplier::where('status','0')->get();
+  	return view('backend.stock.supplier_product_repost', $data);
+  } 
+
+
+  public  function SupplierProductPDF(Request $request){
+    $data['alldata'] = Product::orderBy('suplier_id','ASC')->orderBy('category_id','ASC')->where('suplier_id', $request->supplier_id)->get();
+    return view('backend.PDF.supplier_wise_stock',$data);
+    
+  }
+
 
 
 }
