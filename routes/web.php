@@ -154,7 +154,8 @@ Route::prefix('stock')->group(function()
 		Route::get('/report','Backend\StockController@stockReport')->name('stock.report');
 		Route::get('/report/PDF','Backend\StockController@stockReportPDF')->name('stock.report.pdf');
 		Route::get('/report/supplier/product','Backend\StockController@SupplierProduct')->name('stock.report.supplier.product');
-		Route::get('/report/supplier/product/PDF','Backend\StockController@SupplierProductPDF')->name('stock.report.supplier.product.pdf');
+		Route::get('/report/supplier-wise/PDF','Backend\StockController@SupplierPDF')->name('stock.report.supplier.pdf');
+		Route::get('/report/product-wise/PDF','Backend\StockController@ProductPDF')->name('stock.report.product.pdf');
 });
 
 
