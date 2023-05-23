@@ -55,24 +55,34 @@
           <th> SL </th>
           <th> Supplier </th>
           <th> Category </th>
-          <th> Product Name </th>
-          <th> Unit </th>
+          <th> Product Name </th>   
+          <th> Unit </th>       
           <th> Stock </th>
+          <th> In.Qty </th>
+          <th> Out.Qty </th>
+          
           <th> Status </th>
          </tr>
         </thead>
 
         <tbody>
          @foreach($alldata as $key => $product)
+
+         @php
+         $bayingtotal = App\Model\Purchase::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status','1')->sum('buying_qty');
+         $sellingtotal = App\Model\InvoiceDetali::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status','1')->sum('selling_qty');
+         @endphp
+
           <tr > 
             <td>{{ $key+1 }}</td>
             <td>{{ $product['supplier']['name'] }}</td>
             <td>{{ $product['category']['name'] }}</td>
             <td>{{ $product->name }}</td>
             <td>{{ $product['unit']['name'] }}</td>
-            <td>
-              {{ $product->quantity }}
-            </td>
+            <td>{{ $bayingtotal }}</td>
+            <td>{{ $sellingtotal }}</td>
+            <td>{{ $product->quantity }}</td>
+            
             <td align="center">
              @if($product->status == '0')
               <a class="btn btn-primary btn-sm"> Publish </a >

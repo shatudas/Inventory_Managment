@@ -69,7 +69,7 @@ class InvoicesController extends Controller
         $invoice_detalis->selling_qty = $request->selling_qty[$i];
         $invoice_detalis->unit_price = $request->unit_price[$i];
         $invoice_detalis->selling_price = $request->selling_price[$i];
-        $invoice_detalis->status = '1';
+        $invoice_detalis->status = '0';
         $invoice_detalis->created_by =Auth::user()->id;
         $invoice_detalis->save();
        }
@@ -156,6 +156,8 @@ class InvoicesController extends Controller
    
    foreach ($request->selling_qty as $key => $val) {
     $invoice_detalis = InvoiceDetali::where('id',$key)->first();
+    $invoice_detalis->status = '1';
+    $invoice_detalis->save();
     $product = Product::where('id',$invoice_detalis->product_id)->first();
     if($product->quantity < $request->selling_qty[$key]){
     return redirect()->back()->with('error','Sorry ! You approve maxium value');
