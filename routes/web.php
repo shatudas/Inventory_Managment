@@ -119,6 +119,8 @@ Route::prefix('purchase')->group(function()
 	Route::get('/delete/{id}','Backend\PurchaseController@delete')->name('purchase.delete');
 	Route::get('/purchase.padding/list','Backend\PurchaseController@purchaselist')->name('purchase.padding.list');
 	Route::get('/aprove/{id}','Backend\PurchaseController@aprove')->name('purchase.aprove');
+	Route::get('/report','Backend\PurchaseController@purchasereport')->name('purchase.report');
+	Route::get('/report/PDF','Backend\PurchaseController@purchasereportPDF')->name('purchase.report.pdf');
 });
 
 

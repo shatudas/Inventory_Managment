@@ -79,4 +79,24 @@ class PurchaseController extends Controller
   }
 
 
+  public function purchasereport (){
+    return view('backend.purchase.purchase_report');
+  }
+
+
+  public function purchasereportPDF(Request $request){
+   $startdate = date('Y-m-d',strtotime($request->start_date));
+   $endtdate = date('Y-m-d',strtotime($request->end_date)); 
+   $data['alldata'] = Purchase::whereBetween('date',[$startdate,$endtdate])->where('status','1')->orderBy('supplier_id')->orderBy('category_id')->orderBy('product_id')->get();
+   
+   $data['start_date'] =  date('Y-m-d',strtotime($request->start_date));
+   $data['end_date'] =  date('Y-m-d',strtotime($request->end_date));
+
+
+
+   return view('backend.PDF.Daily_purchase_report_PDF',$data);
+
+  }
+
+
 }

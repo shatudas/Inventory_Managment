@@ -210,10 +210,14 @@ class InvoicesController extends Controller
 
    $startdate = date('Y-m-d',strtotime($request->start_date));
    $endtdate = date('Y-m-d',strtotime($request->end_date)); 
+
+
    $data['alldata'] = Invoice::whereBetween('date',[$startdate,$endtdate])->where('status','1')->get();
    
-   $data['start_date'] =  date('Y-m-d',strtotime('$request->start_date'));
-   $data['end_date'] =  date('Y-m-d',strtotime('$request->end_date'));
+   $data['start_date'] =  date('Y-m-d',strtotime($request->start_date));
+   $data['end_date'] =  date('Y-m-d',strtotime($request->end_date));
+
+
 
    // $pdf = PDF::loadView('backend.PDF.Daily_invoice_report_PDF', $data);
    // return $pdf->download('File.pdf');

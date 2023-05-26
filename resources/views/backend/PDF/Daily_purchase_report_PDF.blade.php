@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Product Wise Report</title>
+  <title>Daily Purchase Repost</title>
    <!-------datatable-------->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -31,59 +31,80 @@
 </head>
 <body>
 
-
  <!-- Main content -->
  <section class="content mt-5">
   <div class="container">
-
    <div class="row">
     <div class="col-12">
 
      <div class="card">
-
-       <h1 class="m-0">Manage Product</h1>
- 
       <div class="card-header">
-       <h3 align="center">Product Wise Report</h3>
+       <h3>Daily Purchase Report 
+        <small>
+        ({{date('d-m-y',strtotime($start_date ))}} - {{ date('d-m-y',strtotime($end_date)) }})
+       </small>
+      </h3>
       </div>
       
       <div class="card-body">
 
-    
-       <table id="example1" class="table table-bordered table-striped">     
+       <table id="example1" class="table table-bordered table-striped ">     
         <thead>
-         <tr > 
-          <th>Supplier Name</th>
-          <th> Category </th>
-          <th> Product Name </th>
-          <th> Unit </th>
-          <th> In.Qty </th>
-          <th> Out.Qty </th>
-          <th> Stock </th>
-
+         <tr> 
+          <th> SL </th>
+          <th> Purchase ID </th>
+          <th> Date </th>
+          <th> Product </th>
+          <th> Qty </th>
+          <th> Unit Price </th>
+          <th> Total Price </th>
          </tr>
         </thead>
 
         <tbody>
-          <tr>
-            @php
-           $bayingtotal = App\Model\Purchase::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status','1')->sum('buying_qty');
-           $sellingtotal = App\Model\InvoiceDetali::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status','1')->sum('selling_qty');
+          @php
+           $total_sum = '0';
           @endphp
-            <td>{{ $product['supplier']['name'] }}</td>
-            <td>{{ $product['category']['name'] }}</td>
-            <td>{{ $product->name }}</td>
-            <td>{{ $product['unit']['name'] }}</td>
-            <td>{{ $bayingtotal }}</td>
-            <td>{{ $sellingtotal }}</td>
-            <td>{{ $product->quantity }}</td>
+
+         @foreach($alldata as $key => $purchase)
+          <tr > 
+            <td>{{ $key+1 }}</td>
+            <td>{{ $purchase->purchase_id }}</td>
+            <td>{{ date('d-m-Y',strtotime($purchase->date)) }}</td>
+            <td>{{ $purchase['supplier']['name'] }}</td>
+            <td> 
+             {{ $purchase->buying_qty }}
+             {{ $purchase['product']['unit']['name'] }}
+            </td>
+            <td>{{ $purchase->unit_price }}</td>
+            <td>{{ $purchase->buying_price }}</td>
+            @php
+             $total_sum += $purchase->buying_price;
+            @endphp
+       
           </tr>
+         @endforeach
+
+         <tr>
+          <td colspan="6" style="text-align:right;">Grand Total</td>
+          <td>{{ $total_sum }}</td>
+         </tr>
+
+
         </tbody>
 
        </table>
 
 
-       <table width="100%" class="mt-5">
+          @php
+           $date = new DateTime('now', new DateTimezone('Asia/Dhaka'));
+           @endphp
+
+           <i>Prining Time : {{ $date->format('F j ,Y, g:i a') }}</i>
+
+
+
+        <table width="100%" class="mt-5">
          <tbody>
           <tr>
            <td width="50%" align="center" style="float:right;">
@@ -94,19 +115,17 @@
          </tbody>
        </table>
 
-
-        @php
-         $date = new DateTime('now', new DateTimezone('Asia/Dhaka'));
-        @endphp
-        <i>Prining Time : {{ $date->format('F j ,Y, g:i a') }}</i>
-
       </div>
-     </div>  
+     </div> 
+
+
+
+
+
     </div>
    </div>
   </div>
  </section>
-
 
 
 
