@@ -136,6 +136,12 @@ class CustomerController extends Controller
 
    }
 	 }
+
+
+	 public function invoiceDetalis($invoice_id){
+   $payment = payment::where('invoice_id',$invoice_id)->first();
+   return view('backend.PDF.invoice_detalis_PDF',compact('payment'));
+	 }
 	   
 
 }

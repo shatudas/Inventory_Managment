@@ -61,7 +61,7 @@
             </td>
             <td>
               <a href="{{ route('customer.invoice.edit',$payment->invoice_id) }}" title="Edit" class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></a>
-              <a href="" title="Delete" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+              <a href="{{ route('customer.invoice.detalis',$payment->invoice_id) }}" title="Detalis" class="btn btn-sm btn-success" target="_blabk"><i class="fa fa-eye"></i></a>
             </td>
           </tr>
          @endforeach
