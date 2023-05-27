@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Invoice Detalis PDF</title>
+  <title>Customer Paid List</title>
    <!-------datatable-------->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -42,137 +42,80 @@
     <div class="col-12">
 
      <div class="card">
-
       <div class="card-header">
-       <h3>Invoice No # {{$payment['invoice']['invoice_no']}}
+       <h3 align="center">Paid Customer List</small>
        </h3>
       </div>
       
       <div class="card-body">
 
-       <table width="100%">
-         <tbody>
-          <tr>
-            <td  colspan="3"><p>Costomer Info:</p></td>
-          </tr>
-
-          <tr>
-           <td><p><strong>Name:</strong> {{ $payment['customer']['name'] }}</p></td>
-           <td><p><strong>Mobile:</strong> {{ $payment['customer']['mobile'] }}</p></td>
-           <td><p><strong>Address:</strong> {{ $payment['customer']['address'] }}</p></td>
-          </tr>
-         </tbody>
-        </table>
-
-
-        <table border="1" width="100%" style="margin-bottom: 10px;">
-         <thead>
-          <tr align="center">
-           <th>SL</th>
-           <th>Category</th>
-           <th>Product</th>
-           
-           <th>Qty</th>
-           <th>Unit Price</th>
-           <th>Total Price</th>
-          </tr>
-         </thead>
-         <tbody>
-
-          @php
-          $totalSum = '0';
-          $invoice_detalis =App\model\InvoiceDetali::where('invoice_id',$payment->invoice_id)->get();
-          @endphp
-
-          @foreach($invoice_detalis as $key => $detalis)
-
-          <tr align="center">
-           <td>{{ $key+1 }}</td>
-           <td>{{ $detalis['category']['name'] }}</td>
-           <td>{{ $detalis['product']['name'] }}</td>
-           
-           <td>{{ $detalis->selling_qty }}</td>
-           <td>{{ $detalis->unit_price }}</td>
-           <td class="text-right">{{ $detalis->selling_price }}</td>
-          </tr>
-           @php
-            $totalSum +=  $detalis->selling_price;
-           @endphp
-
-           @endforeach
-
-          <tr>
-           <td colspan="5" class="text-right">Sub Total</td>
-           <td class="text-right">{{ $totalSum }}</td>
-          </tr>
-
-          <tr>
-           <td colspan="5" class="text-right">Discount</td>
-           <td class="text-right">{{ $payment->discount_amount }}</td>
-          </tr>
-
-          <tr>
-           <td colspan="5" class="text-right">Paid Amount</td>
-           <td class="text-right">{{ $payment->paid_amount }}</td>
-          </tr>
-
-          <tr>
-           <td colspan="5" class="text-right">Due Amount</td>
-           <input type="hidden" name="new_pain_amount" value="{{ $payment->due_amount }}">
-           <td class="text-right">{{ $payment->due_amount }}</td>
-          </tr>
-
-          <tr>
-           <td colspan="5" class="text-right">Grand Total</td>
-           <td class="text-right">{{ $payment->total_amount }}</td>
-          </tr>
-
-          <tr>
-           <td colspan="5" style="text-align:center; font-weight:bold;">Payment Samary</td>
-          </tr>
-
-          <tr>
-           <td colspan="3" style="text-align:right;"><strong>Date</strong></td>
-           <td colspan="3" style="text-align:right;"><strong>Amount</strong></td>
-          </tr>
-
-          @php
-          $payment_detalis = App\Model\PaymentDetali::where('invoice_id',$payment->invoice_id)->get();
-          @endphp
-          
-          @foreach( $payment_detalis as $datalis)
-          <tr>
-           <td colspan="3" style="text-align:right;">{{ date('d-m-Y',strtotime($datalis->date))}}</td>
-           <td colspan="3" style="text-align:right;">{{ $datalis->current_paid_amount }}</td>
-          </tr>
-          @endforeach
-
-         </tbody> 
-
-        </table>
-
-
-
-        
-
-
-       @php
-        $date = new DateTime('now', new DateTimezone('Asia/Dhaka'));
-       @endphp
-       <i>Prining Time : {{ $date->format('F j ,Y, g:i a') }}</i>
-
-
-       <table width="100%" class="mt-5">
-        <tbody>
-         <tr>
-          <td width="50%" align="center"></td>
-          <td width="50%" align="center">
-           <hr width="40%" align="center">
-           Owner Name 
-          </td>
+       <table id="example1" class="table table-bordered table-striped">     
+        <thead>
+         <tr > 
+          <th> SL </th>
+          <th> Customer Name </th>
+          <th> Invoice Number </th>
+          <th> Date </th>
+          <th> Amount </th>
+    
          </tr>
+        </thead>
+
+        <tbody>
+         @php
+          $total_paid = '0';
+         @endphp
+
+         @foreach($alldata as $key => $payment)
+          <tr > 
+            <td>{{ $key+1 }}</td>
+            <td>
+              {{ $payment['customer']['name'] }}, 
+              <small>{{ $payment['customer']['address'] }},
+              {{ $payment['customer']['mobile'] }}</small>
+            </td>
+            <td>Invoice No # {{ $payment['invoice']['invoice_id'] }}</td>
+            <td>{{ date('d-m-Y',strtotime($payment['invoice']['date']))}} </td>
+            <td class="text-right">
+             TK {{ $payment->paid_amount }} 
+            </td>
+
+             @php
+             $total_paid += $payment->paid_amount;
+            @endphp
+
+          </tr>
+         @endforeach
+
+
+         <tr>
+          <td colspan="4" style="text-align: right;">Grend Total</td>
+          <td class="text-right">{{ $total_paid }}</td>
+         </tr>
+
+
         </tbody>
+
        </table>
+
+
+      {{-- <i>Prining Time : {{ $payment->format('F j ,Y, g:i a') }}</i> --}}
+
+
+           <table width="100%" class="mt-5">
+             <tbody>
+               <tr>
+                 <td width="50%" align="center">
+                  <hr width="40%" align="center">
+                 
+                 </td>
+                 <td width="50%" align="center">
+                  <hr width="40%" align="center">
+                   Customer Name 
+                 </td>
+               </tr>
+             </tbody>
+           </table>
  
 
       </div>

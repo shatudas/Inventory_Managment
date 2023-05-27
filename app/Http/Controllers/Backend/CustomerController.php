@@ -142,6 +142,19 @@ class CustomerController extends Controller
    $payment = payment::where('invoice_id',$invoice_id)->first();
    return view('backend.PDF.invoice_detalis_PDF',compact('payment'));
 	 }
-	   
+
+
+	 public function customerPaid(){
+	  $alldata = payment::where('paid_status','!=','full_due')->get();
+	 	return view('backend.customer.customer_paid',compact('alldata'));
+	 }
+
+
+	 public function paidCustomePDF(){
+    $data['alldata'] = payment::where('paid_status','!=','full_due')->get();
+	 	return view('backend.PDF.customer_paid_pdf',$data);
+	 }
+
+
 
 }
