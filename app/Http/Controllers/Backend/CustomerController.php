@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Customer;
+use App\Model\payment;
+use App\Model\PaymentDetali;
 use Auth;
+use PDF;
 
 
 class CustomerController extends Controller
@@ -87,6 +90,52 @@ class CustomerController extends Controller
 	    Customer::find($id)->where('id',$id)->update(['status'=>0]);
 	    return redirect()->back();
 	   }
+
+	 public function creditCustomer(){
+	 	$alldata = payment::whereIn('paid_status',['full_due','partial_paid'])->get();
+	 	 return view('backend.customer.customer_credit',compact('alldata'));
+	 }
+
+
+	 public function creditCustomePDF(){
+	 	$data['alldata'] = payment::whereIn('paid_status',['full_due','partial_paid'])->get();
+	 	return view('backend.PDF.customer_credit_pdf',$data);
+	 }
+
+
+	 public function invoiceEdit($invoice_id){
+
+	 	$payment = payment::where('invoice_id',$invoice_id)->first();
+   return view('backend.customer.edit-invoice',compact('payment'));
+	 }
+
+
+	 public function invoicepdate(Request $request, $invoice_id){
+   if ($request->new_pain_amount<$request->paid_amount) {
+   	return redirect()->back()->with('error','Sorry! you paid maximun value');
+   } else{
+   	$payment = payment::where('invoice_id', $invoice_id)->first();
+   	$payment_detalis =new PaymentDetali();
+   	$payment->paid_status = $request->paid_status;
+   	if ($request->paid_status == 'full_paid') {
+   		$payment->paid_amount = payment::where('invoice_id',$invoice_id)->first()['paid_amount'] + $request->new_pain_amount;
+   		$payment->due_amount = '0';
+   		$payment_detalis->current_paid_amount	= $request->new_pain_amount;
+   	}else if($request->paid_status == 'partial_paid'){
+     $payment->paid_amount =payment::where('invoice_id',$invoice_id)->first()['paid_amount'] + $request->paid_amount;
+     $payment->due_amount =payment::where('invoice_id',$invoice_id)->first()['due_amount'] - $request->paid_amount;
+     $payment_detalis->current_paid_amount	= $request->paid_amount;
+   	}
+
+   	$payment->save();
+   	$payment_detalis->invoice_id = $invoice_id;
+   	$payment_detalis->date = date('Y-m-d',strtotime($request->date));
+   	
+   	$payment_detalis->save();
+   	return redirect()->route('customer.credit')->with('error','Invoices Update Successfully'); 
+
+   }
+	 }
 	   
 
 }

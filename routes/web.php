@@ -64,6 +64,10 @@ Route::prefix('customer')->group(function()
 	Route::get('/delete/{id}','Backend\CustomerController@delete')->name('customer.delete');
 	Route::get('/active/{id}','Backend\CustomerController@active')->name('customer.active');
 	Route::get('/inactive/{id}','Backend\CustomerController@inactive')->name('customer.inactive');
+	Route::get('/credit','Backend\CustomerController@creditCustomer')->name('customer.credit');
+	Route::get('/credit/PDF','Backend\CustomerController@creditCustomePDF')->name('customer.credit.pdf');
+	Route::get('/invoice/edit/{invoice_id}','Backend\CustomerController@invoiceEdit')->name('customer.invoice.edit');
+	Route::post('/invoice/update/{invoice_id}','Backend\CustomerController@invoicepdate')->name('customer.invoice.update');
 });
 
 
