@@ -156,5 +156,24 @@ class CustomerController extends Controller
 	 }
 
 
+		public function CustomeWise(){
+			$customer = Customer::where('status','0')->get();
+			return view('backend.customer.custome_wise_report',compact('customer'));
+		}
+
+
+
+		public function CustomeCredit(Request $request){
+			$data['alldata'] = payment::where('customer_id',$request->customer_id)->whereIn('paid_status',['full_due','partial_paid'])->get();
+	 	return view('backend.PDF.customer_wise_credit_pdf',$data);
+		}
+
+
+		public function CustomePaid(Request $request){
+			 $data['alldata'] = payment::where('customer_id',$request->customer_id)->where('paid_status','!=','full_due')->get();
+	 	return view('backend.PDF.customer_wise_paid_pdf',$data);
+		}
+
+
 
 }

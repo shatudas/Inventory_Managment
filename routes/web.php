@@ -71,6 +71,9 @@ Route::prefix('customer')->group(function()
 	Route::get('/invoice/detalis/{invoice_id}','Backend\CustomerController@invoiceDetalis')->name('customer.invoice.detalis');
 	Route::get('/paid','Backend\CustomerController@customerPaid')->name('customer.paid');
 	Route::get('/paid/PDF','Backend\CustomerController@paidCustomePDF')->name('customer.paid.pdf');
+	Route::get('/wise/report','Backend\CustomerController@CustomeWise')->name('customer.wise.report');
+	Route::get('/wise/credit/report','Backend\CustomerController@CustomeCredit')->name('customer.wise.credit.report');
+	Route::get('/wise/paid/report','Backend\CustomerController@CustomePaid')->name('customer.wise.paid.report');
 	
 
 

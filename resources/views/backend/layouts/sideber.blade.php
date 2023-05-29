@@ -7,6 +7,9 @@
  <nav class="mt-2">
   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+
+  @if(Auth::user()->user_type=='Admin')
+
    <li class="nav-item {{($prefix=='/user')?'menu-open':''}}">
     <a href="#" class="nav-link">
      <i class="nav-icon fas fa-copy"></i>
@@ -25,6 +28,8 @@
      </li>  
     </ul>
    </li>
+
+   @endif
 
 
    <li class="nav-item has-treeview {{($prefix=='/profiles')?'menu-open':''}}">
@@ -87,6 +92,12 @@
       <a href="{{route('customer.paid')}}" class="nav-link  {{($route=='customer.paid')?'active':''}}">
        <i class="far fa-circle nav-icon"></i>
        <p>Paid Customers </p>
+      </a>
+     </li>
+     <li class="nav-item">
+      <a href="{{route('customer.wise.report')}}" class="nav-link  {{($route=='customer.wise.report')?'active':''}}">
+       <i class="far fa-circle nav-icon"></i>
+       <p>Customer Wise Report</p>
       </a>
      </li>
     </ul>
