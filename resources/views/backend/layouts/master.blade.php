@@ -31,6 +31,8 @@
   <link rel="stylesheet" href="{{ asset('backend') }}/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="{{ asset('backend') }}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <!-- jQuery -->
   <script src="{{ asset('backend') }}/plugins/jquery/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
