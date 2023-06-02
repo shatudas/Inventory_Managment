@@ -29,14 +29,13 @@ class UserController extends Controller
 	  ]);
 
   	$data = new User();
-   $data->user_type = $request->user_type;
+    $data->user_type = $request->user_type;
   	$data->name = $request->name;
   	$data->email = $request->email;
   	$data->password = bcrypt($request->password);
    $data->save();
    return redirect()->route('user.view')->with('success','Data Saved SuccessFully');
   }
-
 
   public function edit($id){
   	$editdata=User::find($id);
@@ -45,7 +44,6 @@ class UserController extends Controller
 
 
   public function update(Request $request,$id){
-
   	$this->validate($request,[
 	  'user_type'  =>'required',
 	  'name'       =>'required',
@@ -53,10 +51,10 @@ class UserController extends Controller
 	  ]);
 
 	  $data = User::find($id);
-   $data->user_type = $request->user_type;
+    $data->user_type = $request->user_type;
   	$data->name = $request->name;
   	$data->email = $request->email;
-   $data->save();
+    $data->save();
    return redirect()->route('user.view')->with('success','Data Updated SuccessFully');
   }
 

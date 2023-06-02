@@ -45,8 +45,9 @@
           <th> Qty </th>
           <th> Unit Price </th>
           <th> Buying Price </th>
-          <th> Status </th>
-          <th style="width:8%;"> Action </th>
+          <th > Action </th>
+         {{--  <th> Status </th> --}}
+          
          </tr>
         </thead>
 
@@ -67,20 +68,23 @@
             </td>
             <td>{{ $purchase->unit_price }}</td>
             <td>{{ $purchase->buying_price }}</td>
-            <td>
+
+             <td align="center">
+             @if($purchase->status == '0')
+              <a href="{{ route('purchase.aprove',$purchase->id) }}" title="aproveBtn" id="aproveBtn"  class="btn btn-sm btn-success"><i class="fa fa-check-circle"></i></a>
+              @endif 
+            </td>
+
+           {{--  <td>
               @if($purchase->status == '0')
               <span class="btn btn-primary btn-sm " > padding </span >
              @else
               <span class="btn btn-danger btn-sm"  > Aprove </span>
              @endif 
             </td>
-            </td>
+       --}}
             
-            <td align="center">
-             @if($purchase->status == '0')
-              <a href="{{ route('purchase.aprove',$purchase->id) }}" title="aproveBtn" id="aproveBtn"  class="btn btn-sm btn-success"><i class="fa fa-check-circle"></i></a>
-              @endif 
-            </td>
+           
             
           </tr>
          @endforeach

@@ -55,18 +55,29 @@
             <td align="center" >
              
              @if($user->status == '0')
-              <a href="{{ route('user.inactive',$user->id) }}" class="btn btn-primary btn-sm " > Publish </a >
-             @else
-              <a href="{{ route('user.active',$user->id) }}" class="btn btn-danger btn-sm"  > Draft </a>
+              @if($user->delatable == '1')
+               <a class="btn btn-success btn-sm " aria-disabled="true" disabled> Active </a >
+              @elseif($user->delatable == '0') 
+               <a href="{{ route('user.inactive',$user->id) }}" class="btn btn-primary btn-sm " > Publish </a >
+              @else
+               <a href="{{ route('user.active',$user->id) }}" class="btn btn-danger btn-sm"  > Draft </a>
+              @endif
              @endif 
              
             </td>
             <td>
-             
-              <a href="{{ route('user.edit',$user->id) }}" title="Edit" class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></a>
-        
-     
+
+              @if($user->delatable == '1')
+              
+                <h2><center>
+                 <i class="fa fa-smile-o text-warning" aria-hidden="true" ></i>
+                 </center></h2>
+               
+               @elseif($user->delatable == '0')
+               <a href="{{ route('user.edit',$user->id) }}" title="Edit" class="btn btn-sm btn-primary" ><i class="fa fa-edit"></i></a>
               <a href="{{ route('user.delete',$user->id) }}" title="Delete" id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+              @endif
+               
             </td>
           </tr>
          @endforeach

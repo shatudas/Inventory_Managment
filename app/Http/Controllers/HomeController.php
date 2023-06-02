@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Customer;
 use App\Model\Product;
+use App\Model\payment;
+use App\Model\PaymentDetali;
 use App\User;
 
 class HomeController extends Controller
@@ -30,6 +32,8 @@ class HomeController extends Controller
       $data['user'] = User::where('status','0')->count();
       $data['product'] = Product::where('status','0')->count();
       $data['quantity'] = Product::sum('quantity');
+      $data['total_sale'] = payment::sum('total_amount');
+      $data['PaymentDetali'] = PaymentDetali::sum('current_paid_amount');
 
 
       return view('backend.layouts.home',$data);

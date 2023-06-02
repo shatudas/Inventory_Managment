@@ -8,7 +8,7 @@
   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
 
-  @if(Auth::user()->user_type=='Admin')
+  @if(Auth::user()->user_type=='Admin' OR 'Super_Admin')
 
    <li class="nav-item {{($prefix=='/user')?'menu-open':''}}">
     <a href="#" class="nav-link">
@@ -28,6 +28,8 @@
      </li>  
     </ul>
    </li>
+
+
 
    @endif
 

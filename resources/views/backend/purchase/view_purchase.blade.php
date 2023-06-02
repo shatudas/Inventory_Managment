@@ -33,7 +33,8 @@
       </div>
       
       <div class="card-body">
-       <table id="example1" class="table table-bordered table-striped ">     
+        <div class="table-responsive">
+       <table id="example1" class="table table-bordered table-responsive table-striped ">     
         <thead>
          <tr> 
           <th> SL </th>
@@ -47,7 +48,7 @@
           <th> Unit Price </th>
           <th> Buying Price </th>
           <th> Status </th>
-          <th style="width:8%;"> Action </th>
+          {{-- <th style="width:8%;"> Action </th> --}}
          </tr>
         </thead>
 
@@ -74,19 +75,21 @@
              @else
               <a href="" class="btn btn-danger btn-sm"  > Aprove </a>
              @endif 
-            </td>
-            </td>
-            
-            <td align="center">
+
              @if($purchase->status == '0')
               <a href="{{ route('purchase.delete',$purchase->id) }}" title="Delete" id="delete"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
               @endif 
             </td>
+            
+            {{-- <td align="center">
+             
+            </td> --}}
           </tr>
          @endforeach
         </tbody>
 
        </table>
+       </div>
       </div>
      </div>  
     </div>

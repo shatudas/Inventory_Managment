@@ -112,14 +112,15 @@
    </a>
   <!-- Sidebar -->
    <div class="sidebar">
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    
+    {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
      <div class="image">
       <img src="{{ asset('backend') }}/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
      </div>
-     <div class="info">
-      <a href="{{ Route('home') }}" class="d-block">Alexander Pierce</a>
+     <div class="info" align="center">
+      <center><a href="{{ Route('home') }}" class="d-block">Inventory</a></center>
      </div>
-    </div>
+    </div> --}}
 
     @include('backend.layouts.sideber')
     

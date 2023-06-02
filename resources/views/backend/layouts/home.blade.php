@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Inventory</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -30,10 +30,14 @@
           <h3>{{ $user }}</h3>
           <p>Active User</p>
          </div>
-         <div class="icon">
-          <i class="fa fa-user-circle-o"></i>
+         <div class="icon" >
+          <i class="fa fa-user-circle-o text-white"></i>
          </div>
-         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+         @if(Auth::user()->user_type=='Admin')
+         <a href="{{ route('user.view') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+         @else
+         <a href="#" class="small-box-footer" disable="">More info <i class="fas fa-arrow-circle-right"></i></a>
+         @endif
         </div>
        </div>
         
@@ -44,22 +48,22 @@
           <p> Customer</p>
          </div>
          <div class="icon">
-          <i class="fa fa-user"></i>
+          <i class="fa fa-user text-white"></i>
          </div>
-         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+         <a href="{{route('customer.view')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
        </div>
          
        <div class="col-lg-3 col-6"> 
         <div class="small-box bg-warning">
          <div class="inner">
-          <h3>{{ $product }}</h3>
+          <h3 style="color: #FFF;" >{{ $product }}</h3>
           <p>Active Product</p>
          </div>
          <div class="icon">
-          <i class="fa fa-product-hunt"></i>
+          <i class="fa fa-product-hunt text-white"></i>
          </div>
-         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+         <a href="{{route('product.view')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
        </div>
 
@@ -70,11 +74,39 @@
           <p>Total Stock</p>
          </div>
          <div class="icon">
-          <i class="fa fa-inventory"></i>
+          <i class="fa fa-cube text-white"></i>
          </div>
-         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+         <a href="{{route('stock.report')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
        </div> 
+
+
+       <div class="col-lg-3 col-6"> 
+        <div class="small-box bg-primary">
+         <div class="inner">
+          <h3>{{ $total_sale }}</h3>
+          <p>Total Sale</p>
+         </div>
+         <div class="icon">
+          <i class="fa fa-shopping-cart text-white" aria-hidden="true"></i>
+         </div>
+         <a href="{{route('invoices.view')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+       </div> 
+
+       <div class="col-lg-3 col-6"> 
+        <div class="small-box bg-secondary">
+         <div class="inner">
+          <h3>{{ $PaymentDetali }}</h3>
+          <p>Paid Amount</p>
+         </div>
+         <div class="icon">
+          <i class="fa fa-money text-white" aria-hidden="true"></i>
+         </div>
+         <a href="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+       </div> 
+
 
       </div>
      </div>
